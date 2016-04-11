@@ -99,6 +99,7 @@
           <ul>
           <li class='fragment'>Manual monitoring - icinga 1.x (nagios compatible)</li>
           <li class='fragment'>Automated and distributed monitoring - icinga2</li>
+          <li class='fragment'>Dummy nodes - app-*, redis-*</li>
           </ul>
 				</section>
 
@@ -124,9 +125,11 @@
         <section>
 					<h2>Build a parallel automated setup</h2>
           <ul>
-          <li class='fragment'>Auto generated configs from host inventories</li>
-          <li class='fragment'>Configurable host inventories</li>
-          <li class='fragment'><a href="https://github.com/saurabh-hirani/talks/tree/master/monitoring-transition/automated-setup/icinga2_monitor" target="_new">Demo</a></li>
+          <li class='fragment'>Generate host configs from inventories</li>
+          <li class='fragment'>Decoupled check configs</li>
+          <li class='fragment'>CRUD API</li>
+          <li class='fragment'>Disabled notifications</li>
+          <li class='fragment'><a href="https://github.com/saurabh-hirani/talks/tree/master/monitoring-transition/audit-automated-setup" target="_new">Demo</a></li>
           </ul>
         </section>
 
@@ -136,7 +139,9 @@
           <li class='fragment'>One set at a time</li>
           <li class='fragment'>Enable notifications on new</li>
           <li class='fragment'>Disable notifications on old</li>
-          <li class='fragment'>Rinse, repeat, bake, kill</li>
+          <li class='fragment'>Rinse, repeat</li>
+          <li class='fragment'>Enable all notifications on new</li>
+          <li class='fragment'>Provision for rollback</li>
           <li class='fragment'><a href="">Demo</a></li>
           </ul>
         </section>
@@ -144,8 +149,8 @@
         <section>
 					<h2>Distributed setup</h2>
           <ul>
-          <li class='fragment'>Foundation ready</li>
-          <li class='fragment'>Static distribution side effect</li>
+            <li class='fragment'>Foundation ready</li>
+            <li class='fragment'><a href="https://github.com/saurabh-hirani/talks/blob/master/monitoring-transition/automated-setup/icinga2_monitor/recipes/configure_chef_nodes.rb" target="_new">Static distribution - side effect</a></li>
           <li class='fragment'>Choose wisely for advanced features</li>
           </ul>
         </section>
@@ -163,7 +168,7 @@
 				<section style="text-align: left;">
 					<h1>Thank you</h1>
 					<p>
-						- <a href="https://github.com/saurabh-hirani/talks/tree/master/monitoring-transition">Resources</a>
+						- <a href="https://github.com/saurabh-hirani/talks/tree/master/monitoring-transition" target="_new">Resources</a>
 					</p>
 				</section>
 
