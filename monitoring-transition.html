@@ -46,19 +46,16 @@
 					<p>
 						<small><a href="http://saurabh-hirani.github.io">Saurabh Hirani</a> / <a href="http://twitter.com/sphirani">@sphirani</a></small>
 					</p>
-          <img src="images/sardonic-server-switch-off-phones.png" style="top:0;left:0;" class='fragment'>
+          <img src="images/sardonic-server-users.png" style="top:0;left:0;" class='fragment'>
 				</section>
 
 				<!-- Example of nested vertical slides -->
 				<section>
 					<section>
-						<h2>Why?</h2>
 						<h2 class='fragment'>Manual monitoring</h2>
             <ul>
-              <li class='fragment'>Better than no monitoring</li>
-              <li class='fragment'>New hosts?</li>
-              <li class='fragment'>Decomissioned hosts?</li>
-              <li class='fragment'>Remote operations?</li>
+              <li class='fragment'>A demo setup overstayed its welcome</li>
+              <li class='fragment'>Problems</li>
             </ul>
 						<br>
 						<br>
@@ -70,10 +67,8 @@
 					<section>
 						<h2>Automated monitoring</h2>
             <ul>
-						<li class='fragment'>No manual intervention</li>
-						<li class='fragment'>Auto generated configs from host inventories</li>
-						<li class='fragment'>REST APIs</li>
-						<li class='fragment'>Single point of failure</li>
+              <li class='fragment'>Never send a human to do a machine's job</li>
+              <li class='fragment'>Problems</li>
             </ul>
 						<br>
 						<br>
@@ -85,8 +80,8 @@
 					<section>
 						<h2>Distributed monitoring</h2>
             <ul>
-						<li class='fragment'>Multiple checkers, distributed checks</li>
-						<li class='fragment'>Horizontal scalability</li>
+              <li class='fragment'>Distributed checks</li>
+              <li class='fragment'>Horizontal scalability</li>
             </ul>
 					</section>
 				</section>
@@ -94,25 +89,15 @@
 				<section>
 					<h2>What?</h2>
           <ul>
-          <li class='fragment'>Manual monitoring - icinga 1.x (nagios compatible)</li>
-          <li class='fragment'>Automated and distributed monitoring - icinga2</li>
+          <li class='fragment'>Manual - icinga 1.x (nagios compatible)</li>
+          <li class='fragment'>Automated and distributed - icinga2</li>
           </ul>
 				</section>
 
 				<section>
 					<h2>How?</h2>
+					<h2 class='fragment'>Audit manual setup</h2>
           <ul>
-          <li class='fragment'>Audit manual setup</li>
-          <li class='fragment'>Build parallel automated setup</li>
-          <li class='fragment'>Progressive cutover</li>
-          </ul>
-				</section>
-
-				<section>
-					<h2>Audit manual setup</h2>
-          <ul>
-          <li class='fragment'>Discover</li>
-          <li class='fragment'>Categorize</li>
           <li class='fragment'><a href="https://github.com/saurabh-hirani/talks/tree/master/monitoring-transition/audit-manual-setup" target="_new">Demo</a></li>
           </ul>
 				</section>
@@ -120,9 +105,6 @@
         <section>
 					<h2>Build a parallel automated setup</h2>
           <ul>
-          <li class='fragment'>Generate host configs from inventories</li>
-          <li class='fragment'>REST API</li>
-          <li class='fragment'>Disabled notifications</li>
           <li class='fragment'><a href="https://github.com/saurabh-hirani/talks/tree/master/monitoring-transition/audit-automated-setup" target="_new">Demo</a></li>
           </ul>
         </section>
@@ -130,31 +112,21 @@
         <section>
 					<h2>Progressive cutover</h2>
           <ul>
-          <li class='fragment'>Enable notifications on new</li>
-          <li class='fragment'>Disable notifications on old</li>
-          <li class='fragment'>Rinse, repeat</li>
-          <li class='fragment'>Provision for rollback</li>
-          <li class='fragment'><a href="">Demo</a></li>
+          <li class='fragment'><a href="https://github.com/saurabh-hirani/talks/tree/master/monitoring-transition/progressive-cutover">Demo</a></li>
           </ul>
         </section>
   
         <section>
 					<h2>Distributed setup</h2>
           <ul>
-            <li class='fragment'>Foundation ready</li>
             <li class='fragment'><a href="https://github.com/saurabh-hirani/talks/blob/master/monitoring-transition/automated-setup/icinga2_monitor/recipes/configure_chef_nodes.rb" target="_new">Static distribution - side effect</a></li>
-          <li class='fragment'>Choose wisely for advanced features</li>
+          <li class='fragment'>Advanced features - tool specific</li>
           </ul>
         </section>
  
         <section>
 					<h2>Monitor the monitor</h2>
           <img src="images/sardonic-server-resources.png" style="top:0;left:0;" class='fragment'>
-        </section>
- 
-        <section>
-					<h2>Don't let this happen</h2>
-          <img src="images/sardonic-server-users.png" style="top:0;left:0;" class='fragment'>
         </section>
 
 				<section style="text-align: left;">
