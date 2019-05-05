@@ -69,6 +69,84 @@
 
         <section>
 					<h2>Stage-0 Demo</h3>
+					<ul>
+            <li class='fragment'>Same code - Python 2.7 slow, Python 3.7 fast</li>
+					</ul>
+				</section>
+
+        <section>
+          <img src="images/grequests-liam-if-you-run-slow-fast.jpg" style="top:0;left:0;" >
+				</section>
+
+        <section>
+					<h2>Pre-requisites</h3>
+						<ul>
+							<li class='fragment'>TODO - Serial code flow with requests</li>
+							<li class='fragment'>TODO - Concurrent code flow with grequests</li>
+							<li class='fragment'>TODO - Monkey patching basics</li>
+							<li class='fragment'><a href="https://blog.golang.org/concurrency-is-not-parallelism">Concurrency != Parallelism</a></li>
+						</ul>
+				</section>
+
+        <section>
+					<h2>Stage-1</h2>
+					<ul>
+						<li class='fragment'>Isolated docker container</li>
+						<li class='fragment'>Minimal set of modules</li>
+						<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/01/python27">Python 2.7 fast</a></li>
+						<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/01/python37">Python 3.7 fast</a></li>
+						<li class='fragment'>Demo</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Stage-0 v/s Stage-1</h2>
+					<ul>
+						<li class='fragment'>Stage-0 Python2.7 slow</li>
+						<li class='fragment'>Stage-1 Python2.7 fast</li>
+						<li class='fragment'>Same code</li>
+						<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/00#get-socket-class">Stage-0 Python2.7 socket class</a></li>
+						<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/01/python27#get-socket-class">Stage-1 Python2.7 socket class</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Stage-2</h2>
+					<ul>
+						<li class='fragment'>Stage-1 + <a href="https://pyopenssl.org/en/stable/introduction.html#history">pyopenssl</a></li>
+						<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/02/python27">Python 2.7 slow</a></li>
+						<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/02/python37">Python 3.7 slow</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Why is pyopenssl making code slow?</h2>
+					<ul>
+						<li class='fragment'>grequests = gevent + requests</li>
+						<li class='fragment'>requests <b>optionally</b> <a href="https://github.com/kennethreitz/requests/blob/c4d76800e8917c3fda10cb1f2dee22c8219de3e6/requests/__init__.py#L95">includes pyopenssl</a></li>
+						<li class='fragment'>Changes program flow and re-patches socket</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Solution</h2>
+					<li class='fragment'>Uninstall pyopenssl</li>
+					<li class='fragment'>OR</li>
+					<li class='fragment'>Use <a href="https://github.com/mjs/gevent_openssl">gevent-openssl</a></li>
+					<li class='fragment'>gevent-openssl = pyopenssl compatible with gevent</li>
+				</section>
+
+				<section>
+					<h2>Stage-3</h2>
+					<ul>
+						<li class='fragment'>Stage-2 + <a href="https://github.com/mjs/gevent_openssl">gevent-openssl</a></li>
+						<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/03/python27">Python 2.7 fast</a></li>
+						<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/03/python37">Python 3.7 slow</a></li>
+					</ul>
+				</section>
+
+				<section>
+          <img src="images/grequests-frustration.jpg" style="top:0;left:0;" >
 				</section>
 
         <section>
