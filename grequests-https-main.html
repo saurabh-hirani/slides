@@ -157,11 +157,10 @@
 		</section>
 
 		<section>
-			<h2>Why is pyopenssl present in the output?</h2>
+			<h2>Why pyopenssl?</h2>
 			<ul>
 				<li class='fragment'>grequests = gevent + requests</li>
-				<li class='fragment'>requests <b>optionally</b> <a href="https://github.com/kennethreitz/requests/blob/c4d76800e8917c3fda10cb1f2dee22c8219de3e6/requests/__init__.py#L95">includes pyopenssl</a></li>
-				<li class='fragment'>Why include pyopenssl? - for <a href="https://www.globalsign.com/en/blog/what-is-server-name-indication/">SNI</a> support.</li>
+				<li class='fragment'>requests <b>optionally</b> <a href="https://github.com/kennethreitz/requests/blob/c4d76800e8917c3fda10cb1f2dee22c8219de3e6/requests/__init__.py#L95">includes pyopenssl</a> - for <a href="https://www.globalsign.com/en/blog/what-is-server-name-indication/">SNI</a> support.</li>
 				<li class='fragment'>stdlib ssl did not provide SNI in Python 2.7.8 and older.</li>
 				<li class='fragment'>pyopenssl monkey patches stdlib ssl to add SNI.</li>
 				<li class='fragment'>stdlib in Python 2.7.9+ - ssl.HAS_SNI flag is True.</li>
