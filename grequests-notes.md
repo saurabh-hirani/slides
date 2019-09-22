@@ -142,11 +142,6 @@ vim /usr/local/lib/python2.7/site-packages/urllib3/contrib/pyopenssl.py
 ./docker-exec.sh test_grequests_python27_1 /usr/local/bin/python
 
 from __future__ import print_function
-import urllib3
-print(urllib3.util.ssl_.SSLContext) # should output <class 'ssl.SSLContext'>
-exit()
-
-from __future__ import print_function
 import gevent
 from gevent import monkey
 monkey.patch_all()
@@ -167,13 +162,6 @@ exit()
 ./docker-exec.sh test_grequests_python27_2 /usr/local/bin/python
 
 from __future__ import print_function
-import urllib3
-print(urllib3.util.ssl_.SSLContext) # should output <class 'ssl.SSLContext'>
-exit()
-
-./docker-exec.sh test_grequests_python27_2 /usr/local/bin/python
-
-from __future__ import print_function
 import gevent
 from gevent import monkey
 monkey.patch_all()
@@ -186,8 +174,11 @@ exit()
 from __future__ import print_function
 import grequests
 import urllib3
-print(urllib3.util.ssl_.SSLContext) # should output <class 'gevent._sslgte279.SSLContext'>
+print(urllib3.util.ssl_.SSLContext) # <class 'urllib3.contrib.pyopenssl.PyOpenSSLContext'>
 exit()
+
+./docker-exec.sh test_grequests_python27_2 bash
+# grep monkey
 ```
 
 ### Stage-1 socket class

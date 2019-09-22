@@ -162,10 +162,9 @@
 				<li class='fragment'>grequests = gevent + requests</li>
 				<li class='fragment'>requests <b>optionally</b> <a href="https://github.com/kennethreitz/requests/blob/c4d76800e8917c3fda10cb1f2dee22c8219de3e6/requests/__init__.py#L95">includes pyopenssl</a></li>
 				<li class='fragment'>Why include pyopenssl? - for <a href="https://www.globalsign.com/en/blog/what-is-server-name-indication/">SNI</a> support.</li>
-				<li class='fragment'>stdlib ssl did not provide SNI in Python 2.7.8 or older.</li>
+				<li class='fragment'>stdlib ssl did not provide SNI in Python 2.7.8 and older.</li>
 				<li class='fragment'>pyopenssl monkey patches stdlib ssl to add SNI.</li>
-				<li class='fragment'>stdlib ssl has SNI in Python 2.7.9 and newer</li>
-				<li class='fragment'>Demo</li>
+				<li class='fragment'>stdlib in Python 2.7.9+ - ssl.HAS_SNI flag is True.</li>
 			</ul>
 		</section>
 
@@ -174,6 +173,7 @@
 			<ul>
 				<li class='fragment'>pyopenssl changes program flow and re-patches socket</li>
 				<li class='fragment'>Demo re-patching</li>
+				<li class='fragment'>grequests -> monkey_patch -> requests -> pyopenssl -> monkey_patch</li>
 				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/01/python27#get-socket-class">Stage-1 socket class</a></li>
 				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/02/python27#get-socket-class">Stage-2 socket class</a></li>
 			</ul>
