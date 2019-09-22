@@ -67,6 +67,31 @@
           </ul>
 		</section>
 
+
+
+	   <section>
+			<h2>requests module flow</h3>
+				<ul>
+					<li class='fragment'>Client: Open a connection to the server.</li>
+					<li class='fragment'>Client: Send GET request.</li>
+					<li class='fragment'>Client: Wait for server to respond.</li>
+					<li class='fragment'>Server: Sends response.</li>
+					<li class='fragment'>Client: Repeat same activity for all URLs.</li>
+				</ul>
+		</section>
+
+	   <section>
+			<h2>grequests module flow</h3>
+				<ul>
+					<li class='fragment'>Client: Open a connection to the server.</li>
+					<li class='fragment'>Client: Send GET request.</li>
+					<li class='fragment'>Client: I am not waiting, here's a callback - fire it when the server responds.</li>
+					<li class='fragment'>Client: Repeat same activity for all URLs.</li>
+					<li class='fragment'>Client: Waits for response(s).</li>
+					<li class='fragment'>Server: Sends response (unordered).</li>
+				</ul>
+		</section>
+
         <section>
 			<h2>Stage-0 - Trigger</h3>
 			<ul>
@@ -76,14 +101,24 @@
 			</ul>
 		</section>
 
+		<section>
+		<h2>Local setup to simulate the problem</h3>
+          <ul>
+            <li class='fragment'>Presentation</li>
+            <li class='fragment'>HTTP server</li>
+            <li class='fragment'>HTTPS server</li>
+            <li class='fragment'>Dockerized debugging demo</li>
+          </ul>
+		</section>
+
         <section> <img src="images/grequests-liam-if-you-run-slow-fast.jpg" style="top:0;left:0;" > </section>
 
         <section>
 			<h2>Pre-requisites</h3>
 				<ul>
-					<li class='fragment'>Serial code flow (requests)</li>
-					<li class='fragment'>Concurrent code flow (grequests)</li>
+					<li class='fragment'>requests v/s grequests</li>
 					<li class='fragment'>What is Gevent and why is it fast?</li>
+					<li class='fragment'>What is monkey patching?</li>
 					<li class='fragment'>Monkey patching demo</li>
 					<li class='fragment'>Revisit Stage-0 - Python2.7 slow, Python3.7 fast</li>
 				</ul>
@@ -107,6 +142,7 @@
 				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/01/python27#fetch-urls-with-debug-logs">Stage-1 Python2.7 fast</a> </li>
 				<li class='fragment'>Same code</li>
 				<li class='fragment'>Check profiling output</li>
+				<li class='fragment'>pyopenssl + wait</li>
 			</ul>
 		</section>
 
@@ -121,11 +157,23 @@
 		</section>
 
 		<section>
-			<h2>Why is pyopenssl making code slow?</h2>
+			<h2>Why is pyopenssl present in the output?</h2>
 			<ul>
 				<li class='fragment'>grequests = gevent + requests</li>
 				<li class='fragment'>requests <b>optionally</b> <a href="https://github.com/kennethreitz/requests/blob/c4d76800e8917c3fda10cb1f2dee22c8219de3e6/requests/__init__.py#L95">includes pyopenssl</a></li>
-				<li class='fragment'>Changes program flow and re-patches socket</li>
+				<li class='fragment'>Why include pyopenssl? - for <a href="https://www.globalsign.com/en/blog/what-is-server-name-indication/">SNI</a> support.</li>
+				<li class='fragment'>stdlib ssl did not provide SNI in Python 2.7.8 or older.</li>
+				<li class='fragment'>pyopenssl monkey patches stdlib ssl to add SNI.</li>
+				<li class='fragment'>stdlib ssl has SNI in Python 2.7.9 and newer</li>
+				<li class='fragment'>Demo</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>How is pyopenssl making the code slow?</h2>
+			<ul>
+				<li class='fragment'>pyopenssl changes program flow and re-patches socket</li>
+				<li class='fragment'>Demo re-patching</li>
 				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/01/python27#get-socket-class">Stage-1 socket class</a></li>
 				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/02/python27#get-socket-class">Stage-2 socket class</a></li>
 			</ul>
