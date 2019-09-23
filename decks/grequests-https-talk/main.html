@@ -61,10 +61,10 @@
 		<h2>Problem</h3>
           <ul>
             <li class='fragment'>Constraint: AWS Lambda 15 mins max runtime</li>
+			<li class='fragment'><a href="./notes/requests-module-demo.md" target="_blank">requests module demo</a></li>
             <li class='fragment'>Solution: Convert serial GETs to concurrent</li>
-            <li class='fragment'>requests => grequests</li>
-            <li class='fragment'>Hidden trap: Execution speed varies.
-            <li class='fragment'>Depends on: <b>Other</b> Python modules installed on system.</li>
+            <li class='fragment'>Use grequests</li>
+            <li class='fragment'>Why?</li>
           </ul>
 		</section>
 
@@ -95,8 +95,8 @@
 			<h2>Stage-0 - Trigger</h3>
 			<ul>
 				<li class='fragment'><a href="./notes/python27-http-demo.md" target="_blank">Python2.7 HTTP Demo</a></li>
-				<li class='fragment'><a href="./notes/python27-https-demo.md" target="_blank">Python2.7 HTTPS Demo</a></li>
 				<li class='fragment'><a href="./notes/python37-http-demo.md" target="_blank">Python3.7 HTTP Demo</a></li>
+				<li class='fragment'><a href="./notes/python27-https-demo.md" target="_blank">Python2.7 HTTPS Demo</a></li>
 				<li class='fragment'><a href="./notes/python37-https-demo.md" target="_blank">Python3.7 HTTPS Demo</a></li>
 				<li class='fragment'>Same code - Python 2.7 slow, Python 3.7 fast</li>
 			</ul>
@@ -114,13 +114,14 @@
         <section>
 			<h2>Pre-requisites</h3>
 				<ul>
+					<li class='fragment'>What makes grequests faster than requests?</li>
 					<li class='fragment'>grequests = requests + gevent </li>
 					<li class='fragment'>gevent = greenlet + libev</li>
 					<li class='fragment'><a href="./notes/gevent-basics.md" target="_blank">Terminologies</a></li>
 					<li class='fragment'>Gevent helps in processing requests concurrently.</li>
 					<li class='fragment'>Monkeys are involved.</li>
 					<li class='fragment'><a href="./notes/monkey-patching-demo.md" target="_blank">Monkey patching demo</a></li>
-					<li class='fragment'>Revisit Stage-0 - Python2.7 slow, Python3.7 fast</li>
+					<li class='fragment'>Revisit <a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/00#fetch-urls-with-profiling" target="_blank">Stage-0 - Python2.7 slow</a>, <a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/00#fetch-urls-with-profiling-1" target="_blank">Python3.7 fast</a></li>
 				</ul>
 		</section>
 
@@ -130,17 +131,17 @@
 			<ul>
 				<li class='fragment'>Isolated docker container</li>
 				<li class='fragment'>Minimal set of modules</li>
-				<li class='fragment'>Demo</li>
-				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/01/python27">Python 2.7 fast</a></li>
-				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/01/python37">Python 3.7 fast</a></li>
+				<li class='fragment'><a href="./notes/stage-1-demo.md" target="_blank">Demo</a></li>
+				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/01/python27#fetch-urls-with-debug-logs">Python 2.7 fast</a></li>
+				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/01/python37#fetch-urls-with-debug-logs" target="_blank">Python 3.7 fast</a></li>
 			</ul>
 		</section>
 
 		<section>
 			<h2>Stage-0 v/s Stage-1</h2>
 			<ul>
-				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/00#fetch-urls-with-profiling">Stage-0 Python2.7 slow</a></li>
-				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/01/python27#fetch-urls-with-debug-logs">Stage-1 Python2.7 fast</a> </li>
+				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/00#fetch-urls-with-profiling" target="_blank">Stage-0 - Python2.7 slow</a></li>
+				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/01/python27#profile-code" target="_blank">Stage-1 Python2.7 fast</a> </li>
 				<li class='fragment'>Same code</li>
 				<li class='fragment'>Check profiling output</li>
 				<li class='fragment'>pyopenssl + wait</li>
@@ -151,9 +152,9 @@
 			<h2>Stage-2 - Detect and Verify</h2>
 			<ul>
 				<li class='fragment'>Stage-1 + <a href="https://pyopenssl.org/en/stable/introduction.html#history">pyopenssl</a></li>
-				<li class='fragment'>Demo</li>
-				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/02/python27">Python 2.7 slow</a></li>
-				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/02/python37">Python 3.7 slow</a></li>
+				<li class='fragment'><a href="./notes/stage-2-demo.md" target="_blank">Demo</a></li>
+				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/02/python27#profile-code" target="_blank">Python 2.7 slow</a></li>
+				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/02/python37#profile-code" target="_blank">Python 3.7 slow</a></li>
 			</ul>
 		</section>
 
@@ -163,15 +164,16 @@
 				<li class='fragment'>grequests = gevent + requests</li>
 				<li class='fragment'>requests <b>optionally</b> <a href="https://github.com/kennethreitz/requests/blob/c4d76800e8917c3fda10cb1f2dee22c8219de3e6/requests/__init__.py#L95">includes pyopenssl</a> - for <a href="https://www.globalsign.com/en/blog/what-is-server-name-indication/">SNI</a> support.</li>
 				<li class='fragment'>stdlib ssl did not provide SNI in Python 2.7.8 and older.</li>
-				<li class='fragment'>pyopenssl monkey patches stdlib ssl to add SNI.</li>
+				<li class='fragment'>pyopenssl provides SNI support.</li>
 				<li class='fragment'>stdlib in Python 2.7.9+ - ssl.HAS_SNI flag is True.</li>
+				<li class='fragment'>pyopenssl other use cases - <a href="https://www.reddit.com/r/learnpython/comments/4vxdgz/trying_to_figure_out_how_to_use_pyopenssl/" target="_blank">generate root certs</a>, <a href="https://stackoverflow.com/questions/14565597/pyopenssl-reading-certificate-pkey-file/17178852" target="_blank">reading SSL cert</a></li>
 			</ul>
 		</section>
 
 		<section>
 			<h2>How is pyopenssl making the code slow?</h2>
 			<ul>
-				<li class='fragment'>pyopenssl changes program flow and re-patches socket</li>
+				<li class='fragment'>pyopenssl re-patches an already monkey patched lib</li>
 				<li class='fragment'>Demo re-patching</li>
 				<li class='fragment'>grequests -> monkey_patch -> requests -> pyopenssl -> monkey_patch</li>
 				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/01/python27#get-socket-class">Stage-1 socket class</a></li>
