@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>The curious case of slow/fast grequests code1</title>
+		<title>The curious case of slow/fast grequests code</title>
 
     <meta name="description" content="The curious case of slow/fast grequests code">
 		<meta name="author" content="Saurabh Hirani">
@@ -50,9 +50,10 @@
         <section>
           <h2>Use case</h2>
           <ul>
-            <li class='fragment'>Daily reporting tool: 1000s of HTTPS GETs</li>
+            <li class='fragment'>Daily reporting tool: 1000s of HTTP GETs</li>
             <li class='fragment'>Runtime: 15-20 mins (serial requests)</li>
             <li class='fragment'>Migrate from AWS EC2 to AWS Lambda</li>
+            <li class='fragment'>Other requirements: Migrate to HTTPS + Python3</li>
           </ul>
         </section>
 
@@ -62,7 +63,6 @@
             <li class='fragment'>Constraint: AWS Lambda 15 mins max runtime</li>
             <li class='fragment'>Solution: Convert serial GETs to concurrent</li>
             <li class='fragment'>requests => grequests</li>
-            <li class='fragment'>Another requirement: Migrate to Python3</li>
             <li class='fragment'>Hidden trap: Execution speed varies.
             <li class='fragment'>Depends on: <b>Other</b> Python modules installed on system.</li>
           </ul>
@@ -87,17 +87,17 @@
 					<li class='fragment'>Client: I am not waiting, here's a callback - fire it when the server responds.</li>
 					<li class='fragment'>Client: Repeat same activity for all URLs.</li>
 					<li class='fragment'>Client: Waits for response(s).</li>
-					<li class='fragment'>Server: Sends response (unordered).</li>
+					<li class='fragment'>Server: Sends responses (unordered).</li>
 				</ul>
 		</section>
 
         <section>
 			<h2>Stage-0 - Trigger</h3>
 			<ul>
-				<li class='fragment'><a href="./notes/python27-http-demo.md" target="_new">Python2.7 HTTP Demo</a></li>
-				<li class='fragment'><a href="./notes/python27-https-demo.md" target="_new">Python2.7 HTTPS Demo</a></li>
-				<li class='fragment'><a href="./notes/python37-http-demo.md" target="_new">Python3.7 HTTP Demo</a></li>
-				<li class='fragment'><a href="./notes/python37-https-demo.md" target="_new">Python3.7 HTTPS Demo</a></li>
+				<li class='fragment'><a href="./notes/python27-http-demo.md" target="_blank">Python2.7 HTTP Demo</a></li>
+				<li class='fragment'><a href="./notes/python27-https-demo.md" target="_blank">Python2.7 HTTPS Demo</a></li>
+				<li class='fragment'><a href="./notes/python37-http-demo.md" target="_blank">Python3.7 HTTP Demo</a></li>
+				<li class='fragment'><a href="./notes/python37-https-demo.md" target="_blank">Python3.7 HTTPS Demo</a></li>
 				<li class='fragment'>Same code - Python 2.7 slow, Python 3.7 fast</li>
 			</ul>
 		</section>
@@ -105,22 +105,25 @@
         <section> <img src="./images/grequests-liam-if-you-run-slow-fast.jpg" style="top:0;left:0;" > </section>
 
 		<section>
-		<h2>Local setup to simulate the problem</h3>
+		<h2>Local setup</h3>
           <ul>
-			<li class='fragment'><a href="./notes/local-setup.md" target="_new">Demo</a></li>
+			<li class='fragment'><a href="./notes/local-setup.md" target="_blank">Demo</a></li>
           </ul>
 		</section>
 
         <section>
 			<h2>Pre-requisites</h3>
 				<ul>
-					<li class='fragment'>requests v/s grequests</li>
-					<li class='fragment'>What is Gevent and why is it fast?</li>
-					<li class='fragment'>What is monkey patching?</li>
-					<li class='fragment'>Monkey patching demo</li>
+					<li class='fragment'>grequests = requests + gevent </li>
+					<li class='fragment'>gevent = greenlet + libev</li>
+					<li class='fragment'><a href="./notes/gevent-basics.md" target="_blank">Terminologies</a></li>
+					<li class='fragment'>Gevent helps in processing requests concurrently.</li>
+					<li class='fragment'>Monkeys are involved.</li>
+					<li class='fragment'><a href="./notes/monkey-patching-demo.md" target="_blank">Monkey patching demo</a></li>
 					<li class='fragment'>Revisit Stage-0 - Python2.7 slow, Python3.7 fast</li>
 				</ul>
 		</section>
+
 
         <section>
 			<h2>Stage-1 - Baseline</h2>
@@ -223,8 +226,8 @@
 				<li class='fragment'>Applies only to HTTPS</li>
 				<li class='fragment'>grequests + pyopenssl = slow for Python2.7/Python3.7</li>
 				<li class='fragment'>grequests - pyopenssl = fast for Python2.7/Python3.7</li>
-				<li class='fragment'>grequests + pyopenssl + gevent-openssl = fast for Python2.7</li>
-				<li class='fragment'>grequests + pyopenssl + gevent-openssl + patch = fast for Python3.7</li>
+				<li class='fragment'>grequests + pyopenssl + gevent-openssl = fast for Python2.7, slow for Python 3.7</li>
+				<li class='fragment'>grequests + pyopenssl + gevent-openssl + patch = fast for Pytho2.7/Python3.7</li>
 			</ul>
 		</section>
 
@@ -243,15 +246,6 @@
 				<small><a href="mailto:saurabh.hirani@gmail.com">saurabh.hirani@gmail.com</a> / <a href="http://twitter.com/sphirani">@sphirani</a></small>
 			</p>
 		</section>
-
-       	<section>
-				<h2>Detour - Concurrency != Parallelism</h3>
-				<ul>
-					<li class='fragment'><a href="https://blog.golang.org/concurrency-is-not-parallelism">The talk</a></li>
-				</ul>
-         		<img src="../../images/twitter-concurrency-vs-parallelism.png" style="top:0;left:0;" >
-		</section>
-
 		</div>
 
 		<script src="../../lib/js/head.min.js"></script>
