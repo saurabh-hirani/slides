@@ -184,7 +184,9 @@
 		<section>
 			<h2>Solution</h2>
 			<ul>
-				<li class='fragment'>Uninstall pyopenssl</li>
+				<li class='fragment'>Uninstall pyopenssl if you don't need it.</li>
+				<li class='fragment'>OR</li>
+				<li class='fragment'>Check pyopenssl alernatives e.g. <a href="https://cryptography.io/en/latest/faq/" target="_blank">crytography</a></li>
 				<li class='fragment'>OR</li>
 				<li class='fragment'>Use <a href="https://github.com/mjs/gevent_openssl">gevent-openssl</a></li>
 				<li class='fragment'>gevent-openssl = pyopenssl compatible with gevent</li>
@@ -194,6 +196,11 @@
 		<section>
 			<h2>Stage-3 - Fix-1</h2>
 			<ul>
+				<li class='fragment'>
+				Demo code moves from
+				<a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test_grequests_v1.py" target="_blank">test_grequests_v1.py</a>
+				to
+				<a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test_grequests_v2.py" target="_blank">test_grequests_v2.py</a>
 				<li class='fragment'>Stage-2 + <a href="https://github.com/mjs/gevent_openssl">gevent-openssl</a></li>
 				<li class='fragment'>Demo</li>
 				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/03/python27">Python 2.7 fast</a></li>
