@@ -121,10 +121,16 @@
 					<li class='fragment'>Gevent helps in processing requests concurrently.</li>
 					<li class='fragment'>Monkeys are involved.</li>
 					<li class='fragment'><a href="./notes/monkey-patching-demo.md" target="_blank">Monkey patching demo</a></li>
-					<li class='fragment'>Revisit <a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/00#fetch-urls-with-profiling" target="_blank">Stage-0 - Python2.7 slow</a>, <a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/00#fetch-urls-with-profiling-1" target="_blank">Python3.7 fast</a></li>
 				</ul>
 		</section>
 
+		<section>
+			<h2>Status</h2>
+			<ul>
+				<li class='fragment'>Stage-0 - laptop setup = unpredictable 2.7 + 3.7</li>
+				<li class='fragment'>Stage-1 - grequests = ???</li>
+			</ul>
+		</section>
 
         <section>
 			<h2>Stage-1 - Baseline</h2>
@@ -149,6 +155,15 @@
 		</section>
 
 		<section>
+			<h2>Status</h2>
+			<ul>
+				<li class='fragment'>Stage-0 - laptop setup = unpredictable 2.7 + 3.7</li>
+				<li class='fragment'>Stage-1 - grequests = fast 2.7 + 3.7</li>
+				<li class='fragment'>Stage-2 - Stage-1 + pyopenssl = ???</li>
+			</ul>
+		</section>
+
+		<section>
 			<h2>Stage-2 - Detect and Verify</h2>
 			<ul>
 				<li class='fragment'>Stage-1 + <a href="https://pyopenssl.org/en/stable/introduction.html#history">pyopenssl</a></li>
@@ -157,6 +172,7 @@
 				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/02/python37#profile-code" target="_blank">Python 3.7 slow</a></li>
 			</ul>
 		</section>
+
 
 		<section>
 			<h2>Why pyopenssl?</h2>
@@ -193,6 +209,19 @@
 			</ul>
 		</section>
 
+		<section> <img src="./images/grequests-sharp-turn-car.jpg" style="top:0;left:0;" > </section>
+
+
+		<section>
+			<h2>Status</h2>
+			<ul>
+				<li class='fragment'>Stage-0 - laptop setup = unpredictable 2.7 + 3.7</li>
+				<li class='fragment'>Stage-1 - grequests = fast 2.7 + 3.7</li>
+				<li class='fragment'>Stage-2 - Stage-1 + pyopenssl = slow 2.7 + 3.7</li>
+				<li class='fragment'>Stage-3 - Stage-2 + gevent-openssl = ????</li>
+			</ul>
+		</section>
+
 		<section>
 			<h2>Stage-3 - Fix-1</h2>
 			<ul>
@@ -220,6 +249,17 @@
 		</section>
 
 		<section>
+			<h2>Status</h2>
+			<ul>
+				<li class='fragment'>Stage-0 - laptop setup = unpredictable 2.7 + 3.7</li>
+				<li class='fragment'>Stage-1 - grequests = fast 2.7 + 3.7</li>
+				<li class='fragment'>Stage-2 - Stage-1 + pyopenssl = slow 2.7 + 3.7</li>
+				<li class='fragment'>Stage-3 - Stage-2 + gevent-openssl = fast 2.7, slow 3.7</li>
+				<li class='fragment'>Stage-4 - Stage-3 + patch = ???</li>
+			</ul>
+		</section>
+
+		<section>
 			<h2>Stage-4 - Fix-2</h2>
 			<ul>
 				<li class='fragment'>Patch gevent-openssl to add <b>recv_into</b></li>
@@ -230,15 +270,20 @@
 		</section>
 
 		<section>
-			<h2>Recap</h2>
+			<h2>Final status</h2>
 			<ul>
 				<li class='fragment'>Applies only to HTTPS</li>
-				<li class='fragment'>grequests + pyopenssl = slow for Python2.7/Python3.7</li>
-				<li class='fragment'>grequests - pyopenssl = fast for Python2.7/Python3.7</li>
-				<li class='fragment'>grequests + pyopenssl + gevent-openssl = fast for Python2.7, slow for Python 3.7</li>
-				<li class='fragment'>grequests + pyopenssl + gevent-openssl + patch = fast for Pytho2.7/Python3.7</li>
+				<li class='fragment'>Stage-0 - laptop setup = unpredictable 2.7 + 3.7</li>
+				<li class='fragment'>Stage-1 - grequests = fast 2.7 + 3.7</li>
+				<li class='fragment'>Stage-2 - Stage-1 + pyopenssl = slow 2.7 + 3.7</li>
+				<li class='fragment'>Stage-3 - Stage-2 + gevent-openssl = fast 2.7, slow 3.7</li>
+				<li class='fragment'>Stage-4 - Stage-3 + patch = fast 2.7, fast 3.7</li>
 			</ul>
 		</section>
+
+		<section> <img src="./images/grequests-stage-5-slap.jpg" style="top:0;left:0;" > </section>
+
+		<section> <img src="./images/grequests-its-over.jpg" style="top:0;left:0;" > </section>
 
 		<section>
 			<h2>Takeaways</h2>
