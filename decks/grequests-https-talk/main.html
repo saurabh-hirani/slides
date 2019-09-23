@@ -62,12 +62,11 @@
             <li class='fragment'>Constraint: AWS Lambda 15 mins max runtime</li>
             <li class='fragment'>Solution: Convert serial GETs to concurrent</li>
             <li class='fragment'>requests => grequests</li>
+            <li class='fragment'>Another requirement: Migrate to Python3</li>
             <li class='fragment'>Hidden trap: Execution speed varies.
             <li class='fragment'>Depends on: <b>Other</b> Python modules installed on system.</li>
           </ul>
 		</section>
-
-
 
 	   <section>
 			<h2>requests module flow</h3>
@@ -95,8 +94,10 @@
         <section>
 			<h2>Stage-0 - Trigger</h3>
 			<ul>
-				<li class='fragment'>HTTPS Demo</li>
-				<li class='fragment'>HTTP Demo</li>
+				<li class='fragment'><a href="/decks/grequests-https-talk/notes.md#python27-http-demo" target="_new">Python2.7 HTTP Demo</a></li>
+				<li class='fragment'><a href="/decks/grequests-https-talk/notes.md#python27-https-demo" target="_new">Python2.7 HTTPS Demo</a></li>
+				<li class='fragment'><a href="/decks/grequests-https-talk/notes.md#python37-http-demo" target="_new">Python3.7 HTTP Demo</a></li>
+				<li class='fragment'><a href="/decks/grequests-https-talk/notes.md#python37-https-demo" target="_new">Python2.7 HTTP Demo</a></li>
 				<li class='fragment'>Same code - Python 2.7 slow, Python 3.7 fast</li>
 			</ul>
 		</section>

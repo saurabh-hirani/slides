@@ -1,26 +1,58 @@
-### Local presentation
+To view in Chrome - install the markdown viewer plugin - https://chrome.google.com/webstore/detail/markdown-viewer/ckkdlimhmcjmikdlpkmbgfkaikojcbjk?hl=en
 
-```shell
-npm start
-```
 
-### Local http server
+### Table of Contents
+
+* [Local setup](#local-setup)
+* [Python2.7 HTTP Demo](#python27-http-demo)
+* [Python2.7 HTTPS Demo](#python27-https-demo)
+* [Python3.7 HTTP Demo](#python37-http-demo)
+* [Python3.7 HTTPS Demo](#python37-https-demo)
+* [Monkey patching demo](#monkey-patching-demo)
+* [Stage-0](#stage-0)
+* [Stage-1](#stage-1)
+* [Compare Stage-0 and Stage-1](#compare-stage-0-and-stage-1)
+* [Stage-2](#stage-2)
+* [Why is pyopenssl making code slow?](#why-is-pyopenssl-making-code-slow)
+* [Verify monkey patching in Stage-1 - without pyopenssl](#verify-monkey-patching-in-stage-1---without-pyopenssl)
+* [Verify monkey patching in Stage-2 - with pyopenssl](#verify-monkey-patching-in-stage-2---with-pyopenssl)
+* [Stage-1 socket class](#stage-1-socket-class)
+* [Stage-2 socket class](#stage-2-socket-class)
+
+### Local setup
 
 ```shell
 ./server/run_http_server.sh
-```
-
-### Local https server
-
-```shell
 ./server/run_https_server.sh
-```
-
-### Local docker setup
-
-```shell
 docker-compose --project-name test_grequests up \
                --build --force-recreate
+```
+
+### Python2.7 HTTP Demo
+
+```shell
+python2 ./bin/test_grequests_v1.py --url http://localhost:8081/delay/1 --url-count 10
+python2 ./bin/test_grequests_v1.py --url http://localhost:8081/delay/1 --url-count 100
+```
+
+### Python2.7 HTTPS Demo
+
+```shell
+python2 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/1 --url-count 10
+python2 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/0.1 --url-count 100
+```
+
+### Python3.7 HTTP Demo
+
+```shell
+python3 ./bin/test_grequests_v1.py --url http://localhost:8081/delay/1 --url-count 10
+```
+
+### Python3.7 HTTPS Demo
+
+```shell
+python3 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/1 --url-count 10
+python3 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/0.1 --url-count 100
 ```
 
 ### Monkey patching demo
