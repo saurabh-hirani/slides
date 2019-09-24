@@ -28,6 +28,11 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+		<style>
+		input[type=checkbox] {
+    		transform: scale(2);
+		}
+		</style>
 
 		<!--[if lt IE 9]>
 		<script src="../../lib/js/html5shiv.js"></script>
@@ -38,14 +43,29 @@
 
 		<div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-				<section>
-					<h3>The curious case of slow/fast grequests code</h3>
-					<p>
-						<small><a href="mailto:saurabh.hirani@gmail.com">saurabh.hirani@gmail.com</a> / <a href="http://twitter.com/sphirani">@sphirani</a></small>
-					</p>
-				</section>
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+		<section>
+			<h3>The curious case of slow/fast grequests code</h3>
+			<p>
+				<small><a href="mailto:saurabh.hirani@gmail.com">saurabh.hirani@gmail.com</a> / <a href="http://twitter.com/sphirani">@sphirani</a></small>
+			</p>
+		</section>
+
+        <section>
+          <h2>Show of hands</h2>
+          <ul>
+			<li class='fragment'>How many of you feel that...</li>
+			<li class='fragment'>Show of hands is NOT a good way to get audience feedback?</li>
+			<li class='fragment'>Mandatory subtle joke - check</li>
+
+	<aside class="notes">
+		Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit »S« on your keyboard).
+	</aside>
+
+		  </ul>
+		  </h2>
+		</section>
 
         <section>
           <h2>Use case</h2>
@@ -281,9 +301,13 @@
 			</ul>
 		</section>
 
-		<section> <img src="./images/grequests-stage-5-slap.jpg" style="top:0;left:0;" > </section>
+		<section>
+		    <img src="./images/grequests-stage-5-slap.jpg" style="top:0;left:0;" >
+		</section>
 
-		<section> <img src="./images/grequests-its-over.jpg" style="top:0;left:0;" > </section>
+		<section>
+			<img src="./images/grequests-its-over.jpg" style="top:0;left:0;" >
+		</section>
 
 		<section>
 			<h2>Takeaways</h2>
