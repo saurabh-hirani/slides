@@ -18,35 +18,6 @@
     all_responses = grequests.map(pending_requests)
     ```
 
-- [gevent + urrlib3](https://github.com/gevent/gevent/blob/master/examples/concurrent_download.py):
-
-    ```python
-    import gevent
-    from gevent import monkey
-
-    # patches stdlib (including socket and ssl modules) to cooperate with other greenlets
-    monkey.patch_all()
-
-    import requests
-
-    # Note that we're using HTTPS, so
-    # this demonstrates that SSL works.
-    urls = [
-        'https://www.google.com/',
-        'https://www.apple.com/',
-        'https://www.python.org/'
-    ]
-
-    def print_head(url):
-        print('Starting %s' % url)
-        data = requests.get(url).text
-        print('%s: %s bytes: %r' % (url, len(data), data[:50]))
-
-    jobs = [gevent.spawn(print_head, _url) for _url in urls]
-
-    gevent.wait(jobs)
-    ```
-
 - Stephen Diehl's gevent visualization:
 
 <p align="center">
@@ -58,15 +29,6 @@
     Implicit context switch back to bar
     </pre>
 </p>
-
-- The bare minimum we need to know:
-
-  - Import gevent.
-  - Monkey patch to use non blocking equivalents of standard library.
-  - Make gevent library calls to spawn multiple functions.
-  - Yield control to something when blocked on I/O.
-  - That something decides which function to wake up next.
-  - Run, yield control, run, till the job is done.
 
 - Sources:
   - [GeeksforGeeks coroutine post](https://www.geeksforgeeks.org/coroutine-in-python/)
