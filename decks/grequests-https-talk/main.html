@@ -52,36 +52,45 @@
 			</p>
 		</section>
 
+		<!--
         <section>
           <h2>Show of hands</h2>
           <ul>
 			<li class='fragment'>How many of you feel that...</li>
 			<li class='fragment'>Show of hands is NOT a good way to get audience feedback?</li>
 			<li class='fragment'>Mandatory subtle joke - check</li>
-
-	<aside class="notes">
-		Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit »S« on your keyboard).
-	</aside>
-
 		  </ul>
 		  </h2>
+		</section>
+		-->
+        <section>
+          <h2>Use case</h2>
+          <ul>
+		  	<li class='fragment'>Existing Python code base</li>
+		  	<li class='fragment'>New program which does 10,000+ HTTPS GETs</li>
+		  	<li class='fragment'>Runs slow on Python 2.7</li>
+		  	<li class='fragment'>Runs fast on Python 3.7</li>
+          </ul>
+		</section>
+
+        <section>
+          <h2>The End</h2>
 		</section>
 
         <section>
           <h2>Use case</h2>
           <ul>
-            <li class='fragment'>Daily reporting tool: 1000s of HTTP GETs</li>
-            <li class='fragment'>Runtime: 15-20 mins (serial requests)</li>
+            <li class='fragment'>Daily reporting tool: 10,000+ of HTTP GETs</li>
+            <li class='fragment'>Runtime: 20-25 mins (serial requests)</li>
             <li class='fragment'>Migrate from AWS EC2 to AWS Lambda</li>
             <li class='fragment'>Other requirements: Migrate to HTTPS + Python3</li>
           </ul>
         </section>
 
 		<section>
-		<h2>Problem</h3>
+		<h2>Problem</h2>
           <ul>
             <li class='fragment'>Constraint: AWS Lambda 15 mins max runtime</li>
-			<li class='fragment'><a href="./notes/requests-module-demo.md" target="_blank">requests module demo</a></li>
             <li class='fragment'>Solution: Convert serial GETs to concurrent</li>
             <li class='fragment'>Use grequests</li>
             <li class='fragment'>Why?</li>
@@ -89,7 +98,7 @@
 		</section>
 
 	   <section>
-			<h2>requests module flow</h3>
+			<h2>requests module flow</h2>
 			    <!--
 				<ul>
 					<li class='fragment'>Client: Open a connection to the server.</li>
@@ -135,9 +144,15 @@
    			<img src="./images/python-requests-flow-10.png" style="top:0;left:0;" >
 		</section>
 
+	   <section>
+			<h2>requests module demo</h2>
+			<ul>
+				<li class='fragment'><a href="./notes/requests-module-demo.md" target="_blank">Demo</a></li>
+			</ul>
+		</section>
 
 	   <section>
-			<h2>grequests module flow</h3>
+			<h2>grequests module flow</h2>
 			    <!--
 				<ul>
 					<li class='fragment'>Client: Open a connection to the server.</li>
@@ -187,8 +202,32 @@
    			<img src="./images/python-grequests-flow-9.png" style="top:0;left:0;" >
 		</section>
 
+		<section>
+			<h2>grequests module demo</h2>
+			<ul>
+				<li class='fragment'><a href="./notes/grequests-module-demo.md" target="_blank">Demo</a></li>
+			</ul>
+		</section>
+
         <section>
-			<h2>Stage-0 - Trigger</h3>
+			<h2>gevent</h2>
+				<ul>
+					<li class='fragment'>grequests = requests + gevent </li>
+					<li class='fragment'>gevent = monkey-patching + greenlet + libev</li>
+					<li class='fragment'><a href="./notes/gevent-requests-demo.md" target="_blank">gevent + requests demo</a></li>
+					<li class='fragment'><a href="./images/grequests-flow.gif" target="_blank">Stephen Diehl's greenlet visualization</a></li>
+					<li class='fragment'><a href="./notes/monkey-patching-demo.md" target="_blank">Monkey patching demo</a></li>
+					<li class='fragment'><a href="./notes/gevent-basics.md" target="_blank">Details</a></li>
+					<li class='fragment'><a href="https://www.youtube.com/watch?v=GunMToxbE0E">Kavya Joshi's excellent in-depth talk</a></li>
+					<!--
+					<li class='fragment'><a href="./images/grequests-flow.gif" target="_blank">Stephen Diehl's greenlet visualization</a>, <a href="https://sdiehl.github.io/gevent-tutorial/" target="_blank">tutorial</a></li>
+					<li class='fragment'>libev = high perf event loop, executes callbacks</li>
+					-->
+				</ul>
+		</section>
+
+        <section>
+			<h2>Stage-0 - Trigger</h2>
 			<ul>
 				<li class='fragment'><a href="./notes/python27-http-demo.md" target="_blank">Python2.7 HTTP Demo</a></li>
 				<li class='fragment'><a href="./notes/python37-http-demo.md" target="_blank">Python3.7 HTTP Demo</a></li>
@@ -200,25 +239,15 @@
 
         <section> <img src="./images/grequests-liam-if-you-run-slow-fast.jpg" style="top:0;left:0;" > </section>
 
+
 		<section>
-		<h2>Local setup</h3>
+		<h2>Local setup</h2>
           <ul>
 			<li class='fragment'><a href="./notes/local-setup.md" target="_blank">Demo</a></li>
           </ul>
 		</section>
 
-        <section>
-			<h2>Pre-requisites</h3>
-				<ul>
-					<li class='fragment'>What makes grequests faster than requests?</li>
-					<li class='fragment'>grequests = requests + gevent </li>
-					<li class='fragment'>gevent = greenlet + libev</li>
-					<li class='fragment'><a href="./notes/gevent-basics.md" target="_blank">Terminologies</a></li>
-					<li class='fragment'>Gevent helps in processing requests concurrently.</li>
-					<li class='fragment'>Monkeys are involved.</li>
-					<li class='fragment'><a href="./notes/monkey-patching-demo.md" target="_blank">Monkey patching demo</a></li>
-				</ul>
-		</section>
+
 
 		<section>
 			<h2>Status</h2>
@@ -227,6 +256,39 @@
 				<li class='fragment'>Stage-1 - grequests = ???</li>
 			</ul>
 		</section>
+
+		<!--
+        <section>
+			<h2>monkey-patching</h2>
+			<ul>
+				<li class='fragment'>gevent = <span class="fragment" index="0"><b>monkey-patching</b></span> + greenlet + libev</li>
+				<li class='fragment'>Dynamic replacement of attributes at runtime</li>
+				<li class='fragment'>Replace blocking socket by non-blocking socket</li>
+				<li class='fragment'><a href="https://stackoverflow.com/questions/5626193/what-is-monkey-patching" target="_blank">Stackoverflow explanation</a></li>
+			</ul>
+		</section>
+		-->
+
+		<!--
+        <section>
+			<h2>greenlet</h2>
+			<ul>
+				<li class='fragment'>gevent = monkey-patching + <span class="fragment" index="0"><b>greenlet</b></span> + libev</li>
+				<li class='fragment'>C ext, run coroutines, cooperatively scheduled</li>
+				<li class='fragment'>Jump between greenlets using <b>.switch()</b></li>
+				<li class='fragment'><a href="./images/grequests-flow.gif" target="_blank">Stephen Diehl's greenlet visualization</a>, <a href="https://sdiehl.github.io/gevent-tutorial/" target="_blank">tutorial</a></li>
+			</ul>
+		</section>
+
+        <section>
+			<h2>libev</h2>
+			<ul>
+				<li class='fragment'>gevent = monkey-patching + greenlet + <span class="fragment" index="0"><b>libev</b></span></li>
+				<li class='fragment'>High performance event loop</li>
+				<li class='fragment'>Execute callback on events</li>
+			</ul>
+		</section>
+		-->
 
         <section>
 			<h2>Stage-1 - Baseline</h2>
@@ -242,11 +304,12 @@
 		<section>
 			<h2>Stage-0 v/s Stage-1</h2>
 			<ul>
-				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/00#fetch-urls-with-profiling" target="_blank">Stage-0 - Python2.7 slow</a></li>
-				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/01/python27#profile-code" target="_blank">Stage-1 Python2.7 fast</a> </li>
-				<li class='fragment'>Same code</li>
-				<li class='fragment'>Check profiling output</li>
-				<li class='fragment'>pyopenssl + wait</li>
+				<li class='fragment'><a href="./notes/python27-https-demo.md" target="_blank">Stage-0 - Python2.7 slow</a></li>
+				<li class='fragment'><a href="./notes/stage-1-demo.md" target="_blank">Stage-1 - Python2.7 fast</a></li>
+				<li class='fragment'><a href="./notes/stage-0-python27-profiling.md" target="_blank">Stage-0 - Python2.7 profiling</a></li>
+				<li class='fragment'><a href="./notes/stage-1-python27-profiling.md" target="_blank">Stage-1 - Python2.7 profiling</a></li>
+				<li class='fragment'><a href="./notes/stage-0-python27-tracing.md" target="_blank">Stage-0 - Python2.7 tracing</a></li>
+				<li class='fragment'><a href="./notes/stage-1-python27-tracing.md" target="_blank">Stage-1 - Python3.7 tracing</a></li>
 			</ul>
 		</section>
 
@@ -264,8 +327,8 @@
 			<ul>
 				<li class='fragment'>Stage-1 + <a href="https://pyopenssl.org/en/stable/introduction.html#history">pyopenssl</a></li>
 				<li class='fragment'><a href="./notes/stage-2-demo.md" target="_blank">Demo</a></li>
-				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/02/python27#profile-code" target="_blank">Python 2.7 slow</a></li>
-				<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/02/python37#profile-code" target="_blank">Python 3.7 slow</a></li>
+				<li class='fragment'>Python 2.7 slow</li>
+				<li class='fragment'>Python 3.7 slow</li>
 			</ul>
 		</section>
 
@@ -274,10 +337,10 @@
 			<h2>Why pyopenssl?</h2>
 			<ul>
 				<li class='fragment'>grequests = gevent + requests</li>
-				<li class='fragment'>requests <b>optionally</b> <a href="https://github.com/kennethreitz/requests/blob/c4d76800e8917c3fda10cb1f2dee22c8219de3e6/requests/__init__.py#L95">includes pyopenssl</a> - for <a href="https://www.globalsign.com/en/blog/what-is-server-name-indication/">SNI</a> support.</li>
-				<li class='fragment'>stdlib ssl did not provide SNI in Python 2.7.8 and older.</li>
-				<li class='fragment'>pyopenssl provides SNI support.</li>
-				<li class='fragment'>stdlib in Python 2.7.9+ - ssl.HAS_SNI flag is True.</li>
+				<li class='fragment'>requests <b>optionally</b> <a href="https://github.com/kennethreitz/requests/blob/c4d76800e8917c3fda10cb1f2dee22c8219de3e6/requests/__init__.py#L95">includes pyopenssl</a> - for <a href="https://www.globalsign.com/en/blog/what-is-server-name-indication/">SNI</a> support</li>
+				<li class='fragment'>stdlib ssl did not provide SNI in Python 2.7.8 and older</li>
+				<li class='fragment'>pyopenssl provides SNI support</li>
+				<li class='fragment'>stdlib in Python 2.7.9+ - ssl.HAS_SNI flag is True</li>
 				<li class='fragment'>pyopenssl other use cases - <a href="https://www.reddit.com/r/learnpython/comments/4vxdgz/trying_to_figure_out_how_to_use_pyopenssl/" target="_blank">generate root certs</a>, <a href="https://stackoverflow.com/questions/14565597/pyopenssl-reading-certificate-pkey-file/17178852" target="_blank">reading SSL cert</a></li>
 			</ul>
 		</section>
@@ -390,6 +453,7 @@
 			<ul>
 				<li class='fragment'>Profile/trace your code</li>
 				<li class='fragment'>Isolate scenarios</li>
+				<li class='fragment'>Visualize code flow</li>
 				<li class='fragment'>Share your learnings</li>
 			</ul>
 		</section>

@@ -18,7 +18,7 @@
     all_responses = grequests.map(pending_requests)
     ```
 
-- [gevent + requests](https://github.com/gevent/gevent/blob/master/examples/concurrent_download.py):
+- [gevent + urrlib3](https://github.com/gevent/gevent/blob/master/examples/concurrent_download.py):
 
     ```python
     import gevent
@@ -59,10 +59,10 @@
     </pre>
 </p>
 
-
 - The bare minimum we need to know:
 
   - Import gevent.
+  - Monkey patch to use non blocking equivalents of standard library.
   - Make gevent library calls to spawn multiple functions.
   - Yield control to something when blocked on I/O.
   - That something decides which function to wake up next.
