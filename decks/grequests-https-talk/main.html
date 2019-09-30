@@ -107,10 +107,39 @@
 							Solution: Convert serial GETs to concurrent
 						</li>
 						<li class='fragment'>
-							Use grequests
+							requests -> grequests
 						</li>
 						<li class='fragment'>
-							Why?
+							Inconsistent behavior between Python2.7 and Python3.7
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Stage-0 - Trigger</h2>
+					<ul>
+						<li class='fragment'>
+							<a href="./notes/python27-http-demo.md" target="_blank">
+								Python2.7 HTTP Demo
+							</a>
+						</li>
+						<li class='fragment'>
+							<a href="./notes/python37-http-demo.md" target="_blank">
+								Python3.7 HTTP Demo
+							</a>
+						</li>
+						<li class='fragment'>
+							<a href="./notes/python27-https-demo.md" target="_blank">
+								Python2.7 HTTPS Demo
+							</a>
+						</li>
+						<li class='fragment'>
+							<a href="./notes/python37-https-demo.md" target="_blank">
+								Python3.7 HTTPS Demo
+							</a>
+						</li>
+						<li class='fragment'>
+							Same code - Python 2.7 slow, Python 3.7 fast
 						</li>
 					</ul>
 				</section>
@@ -259,69 +288,37 @@
 				</section>
 
 				<section>
-					<h2>gevent</h2>
-					<ul>
-						<li class='fragment'>
-							grequests = requests + gevent
-						</li>
-						<li class='fragment'>
-							gevent = monkey-patching + greenlet + libev
-						</li>
-						<li class='fragment'>
-							<a href="./notes/gevent-requests-demo.md" target="_blank">
-								gevent + requests demo
-							</a>
-						</li>
-						<li class='fragment'>
-							<a href="./images/grequests-flow.gif" target="_blank">
-								Stephen Diehl's greenlet visualization
-							</a>
-						</li>
-						<li class='fragment'>
-							<a href="./notes/monkey-patching-demo.md" target="_blank">
-								Monkey patching demo
-							</a>
-						</li>
-						<li class='fragment'>
-							<a href="./notes/gevent-basics.md" target="_blank">
-								Details
-							</a>
-						</li>
-						<li class='fragment'>
-							<a href="https://www.youtube.com/watch?v=GunMToxbE0E">
-								Kavya Joshi's excellent in-depth talk
-							</a>
-						</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Stage-0 - Trigger</h2>
-					<ul>
-						<li class='fragment'>
-							<a href="./notes/python27-http-demo.md" target="_blank">
-								Python2.7 HTTP Demo
-							</a>
-						</li>
-						<li class='fragment'>
-							<a href="./notes/python37-http-demo.md" target="_blank">
-								Python3.7 HTTP Demo
-							</a>
-						</li>
-						<li class='fragment'>
-							<a href="./notes/python27-https-demo.md" target="_blank">
-								Python2.7 HTTPS Demo
-							</a>
-						</li>
-						<li class='fragment'>
-							<a href="./notes/python37-https-demo.md" target="_blank">
-								Python3.7 HTTPS Demo
-							</a>
-						</li>
-						<li class='fragment'>
-							Same code - Python 2.7 slow, Python 3.7 fast
-						</li>
-					</ul>
+					<h2>requests v/s grequests</h2>
+					<table class="reveal">
+						<thead>
+							<tr>
+								<th>Sr. No.</th>
+								<th>n</th>
+								<th>requests</th>
+								<th>grequests</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1.</td>
+								<td>3</td>
+								<td>3.30</td>
+								<td>1.20</td>
+							</tr>
+							<tr>
+								<td>2.</td>
+								<td>5</td>
+								<td>5.50</td>
+								<td>1.30</td>
+							</tr>
+							<tr>
+								<td>3.</td>
+								<td>10</td>
+								<td>11</td>
+								<td>1.55</td>
+							</tr>
+						</tbody>
+					</table>
 				</section>
 
 				<section>
@@ -344,10 +341,10 @@
 					<h2>Status</h2>
 					<ul>
 						<li class='fragment'>
-							Stage-0 - laptop setup = unpredictable 2.7 + 3.7
+							Stage-0 - laptop setup = Python 2.7 slow, Python 3.7 fast
 						</li>
 						<li class='fragment'>
-							Stage-1 - grequests = ???
+							Stage-1 - Baseline = ???
 						</li>
 					</ul>
 				</section>
@@ -395,17 +392,10 @@
 							</a>
 						</li>
 						<li class='fragment'>
-							<a
-								href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/01/python27#fetch-urls-with-debug-logs">
-								Python 2.7 fast
-							</a>
+							Python 2.7 fast
 						</li>
 						<li class='fragment'>
-							<a
-								href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/01/python37#fetch-urls-with-debug-logs"
-								target="_blank">
-								Python 3.7 fast
-							</a>
+							Python 3.7 fast
 						</li>
 					</ul>
 				</section>
@@ -453,7 +443,7 @@
 							Stage-0 - laptop setup = unpredictable 2.7 + 3.7
 						</li>
 						<li class='fragment'>
-							Stage-1 - grequests = fast 2.7 + 3.7
+							Stage-1 - Baseline = fast 2.7 + 3.7
 						</li>
 						<li class='fragment'>
 							Stage-2 - Stage-1 + pyopenssl = ???
@@ -480,9 +470,81 @@
 						<li class='fragment'>
 							Python 3.7 slow
 						</li>
+						<li class='fragment'>
+							Concurrent conns but send/recv serial
+						</li>
 					</ul>
 				</section>
 
+				<section>
+					<h2>gevent</h2>
+					<ul>
+						<li class='fragment'>
+							grequests = requests + gevent
+						</li>
+						<li class='fragment'>
+							gevent = monkey-patching + greenlet + libev
+						</li>
+						<li class='fragment'>
+							<a href="./notes/gevent-requests-demo.md" target="_blank">
+								gevent + requests demo
+							</a>
+						</li>
+						<li class='fragment'>
+							<a href="./images/grequests-flow.gif" target="_blank">
+								Stephen Diehl's greenlet visualization
+							</a>
+						</li>
+						<li class='fragment'>
+							<a href="./notes/monkey-patching-demo.md" target="_blank">
+								Monkey patching demo
+							</a>
+						</li>
+						<li class='fragment'>
+							<a href="./notes/gevent-basics.md" target="_blank">
+								Details,
+							</a>
+							<a href="https://www.youtube.com/watch?v=GunMToxbE0E">
+								Kavya Joshi's excellent in-depth talk
+							</a>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>How is pyopenssl making the code slow?</h2>
+					<ul>
+						<li class='fragment'>
+							pyopenssl re-patches an already monkey patched lib
+						</li>
+						<li class='fragment'>
+							<a href="./images/grequests-gevent-patching.png" target="_blank">
+								grequests -> gevent -> monkey_patch -> ssl_socket
+							</a>
+						</li>
+						<li class='fragment'>
+							<a href="./images/grequests-pyopenssl-repatching.png" target="_blank">
+								grequests -> requests -> monkey_patch_again -> ssl_socket
+							</a>
+						</li>
+						<li class='fragment'>
+							<a href="./notes/stage-1-socket-class-without-pyopenssl.md"
+								target="_blank">
+								Stage-1 socket class without pyopenssl
+							</a>
+						</li>
+						<li class='fragment'>
+							<a href="./notes/stage-2-socket-class-with-pyopenssl.md" target="_blank">
+								Stage-2 socket class with pyopenssl
+							</a>
+						</li>
+						<li class='fragment'>
+							<a href="./images/urllib3-new-conn.png" target="_blank">
+								Concurrent conns but Stage-2 send/recv serial
+							</a>
+						</li>
+					</li>
+				</section>
 
 				<section>
 					<h2>Why pyopenssl?</h2>
@@ -523,32 +585,6 @@
 					</ul>
 				</section>
 
-				<section>
-					<h2>How is pyopenssl making the code slow?</h2>
-					<ul>
-						<li class='fragment'>
-							pyopenssl re-patches an already monkey patched lib
-						</li>
-						<li class='fragment'>
-							Demo re-patching
-						</li>
-						<li class='fragment'>
-							grequests -> monkey_patch -> requests -> pyopenssl -> monkey_patch
-						</li>
-						<li class='fragment'>
-							<a
-								href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/01/python27#get-socket-class">
-								Stage-1 socket class
-							</a>
-						</li>
-						<li class='fragment'>
-							<a
-								href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/02/python27#get-socket-class">
-								Stage-2 socket class
-							</a>
-						</li>
-					</ul>
-				</section>
 
 				<section>
 					<h2>Solution</h2>
@@ -575,8 +611,9 @@
 					</ul>
 				</section>
 
-				<section> <img src="./images/grequests-sharp-turn-car.jpg"
-						style="top:0;left:0;"> </section>
+				<section>
+					<img src="./images/grequests-sharp-turn-car.jpg" style="top:0;left:0;">
+				</section>
 
 				<section>
 					<h2>Status</h2>
@@ -585,7 +622,7 @@
 							Stage-0 - laptop setup = unpredictable 2.7 + 3.7
 						</li>
 						<li class='fragment'>
-							Stage-1 - grequests = fast 2.7 + 3.7
+							Stage-1 - Baseline = fast 2.7 + 3.7
 						</li>
 						<li class='fragment'>
 							Stage-2 - Stage-1 + pyopenssl = slow 2.7 + 3.7
@@ -616,151 +653,166 @@
 						<li class='fragment'>
 							Stage-2 + <a href="https://github.com/mjs/gevent_openssl">gevent-openssl</a></li>
 						<li class='fragment'>
-							Demo
-						</li>
-						<li class='fragment'>
-							<a
-								href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/03/python27">
-								Python 2.7 fast
+							<a href="./notes/stage-3-demo.md" target="_blank">
+								Demo
 							</a>
 						</li>
 						<li class='fragment'>
-							<a
-								href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/tree/master/stages/03/python37">
-								Python 3.7 slow
-							</a>
+							Python 2.7 fast
 						</li>
-					</ul>
-				</section>
-
-				<section> <img src="./images/grequests-frustration.jpg"
-						style="top:0;left:0;"> </section>
-
-				<section>
-					<h2>Why?</h2>
-					<ul>
 						<li class='fragment'>
+							Python 3.7 slow
+						</a>
+					</li>
+				</ul>
+			</section>
+
+			<section> <img src="./images/grequests-frustration.jpg"
+					style="top:0;left:0;"> </section>
+
+			<section>
+				<h2>Why?</h2>
+				<ul>
+					<li class='fragment'>
+						<a href="./notes/python27-uses-recv.md" target="_blank">
 							Python2.7 uses <b>recv</b>
-						</li>
-						<li class='fragment'>
+						</a>
+					</li>
+					<li class='fragment'>
+						<a href="./notes/python37-uses-recv_into.md" target="_blank">
 							Python3.7 uses <b>recv_into</b>
-						</li>
-						<li class='fragment'>
-							gevent-openssl does not override
-							<a
-								href="https://github.com/mjs/gevent_openssl/blob/645ded94710d886bce671c2f001d30643242b3cd/gevent_openssl/SSL.py">
-								recv_into
-							</a>
-						</li>
-					</ul>
-				</section>
+						</a>
+					</li>
+					<li class='fragment'>
+						gevent-openssl does not override
+						<a
+							href="https://github.com/mjs/gevent_openssl/blob/645ded94710d886bce671c2f001d30643242b3cd/gevent_openssl/SSL.py">
+							recv_into
+						</a>
+					</li>
+				</ul>
+			</section>
 
-				<section>
-					<h2>Status</h2>
-					<ul>
-						<li class='fragment'>
-							Stage-0 - laptop setup = unpredictable 2.7 + 3.7
-						</li>
-						<li class='fragment'>
-							Stage-1 - grequests = fast 2.7 + 3.7
-						</li>
-						<li class='fragment'>
-							Stage-2 - Stage-1 + pyopenssl = slow 2.7 + 3.7
-						</li>
-						<li class='fragment'>
-							Stage-3 - Stage-2 + gevent-openssl = fast 2.7, slow 3.7
-						</li>
-						<li class='fragment'>
-							Stage-4 - Stage-3 + patch = ???
-						</li>
-					</ul>
-				</section>
+			<section>
+				<h2>Status</h2>
+				<ul>
+					<li class='fragment'>
+						Stage-0 - laptop setup = unpredictable 2.7 + 3.7
+					</li>
+					<li class='fragment'>
+						Stage-1 - Baseline = fast 2.7 + 3.7
+					</li>
+					<li class='fragment'>
+						Stage-2 - Stage-1 + pyopenssl = slow 2.7 + 3.7
+					</li>
+					<li class='fragment'>
+						Stage-3 - Stage-2 + gevent-openssl = fast 2.7, slow 3.7
+					</li>
+					<li class='fragment'>
+						Stage-4 - Stage-3 + patch = ???
+					</li>
+				</ul>
+			</section>
 
-				<section>
-					<h2>Stage-4 - Fix-2</h2>
-					<ul>
-						<li class='fragment'>
-							Patch gevent-openssl to add <b>recv_into</b>
-						</li>
-						<li class='fragment'>
+			<section>
+				<h2>Stage-4 - Fix-2</h2>
+				<ul>
+					<li class='fragment'>
+						Patch gevent-openssl to add <b>recv_into</b>
+					</li>
+					<li class='fragment'>
+						<a href="./notes/stage-4-before-patching-demo.md" target="_blank">
 							Before patching demo
-						</li>
-						<li class='fragment'>
+						</a>
+					</li>
+					<li class='fragment'>
+						<a href="./notes/stage-4-apply-patch.md" target="_blank">
+							Apply patch
+						</a>
+					</li>
+					<li class='fragment'>
+						<a href="./notes/stage-4-after-patching-demo.md" target="_blank">
 							After patching demo
-						</li>
-						<li class='fragment'>
-							<a href="https://github.com/mjs/gevent_openssl/pull/15">
-								PR to fix the issue
-							</a>
-						</li>
-					</ul>
-				</section>
+						</a>
+					</li>
+					<li class='fragment'>
+						<a href="./notes/stage-4-show-patch.md" target="_blank">
+							Show patch
+						</a>
+					</li>
+					<li class='fragment'>
+						<a href="https://github.com/mjs/gevent_openssl/pull/15">
+							PR to fix the issue
+						</a>
+					</li>
+				</ul>
+			</section>
 
-				<section>
-					<h2>Final status</h2>
-					<ul>
-						<li class='fragment'>
-							Applies only to HTTPS
-						</li>
-						<li class='fragment'>
-							Stage-0 - laptop setup = unpredictable 2.7 + 3.7
-						</li>
-						<li class='fragment'>
-							Stage-1 - grequests = fast 2.7 + 3.7
-						</li>
-						<li class='fragment'>
-							Stage-2 - Stage-1 + pyopenssl = slow 2.7 + 3.7
-						</li>
-						<li class='fragment'>
-							Stage-3 - Stage-2 + gevent-openssl = fast 2.7, slow 3.7
-						</li>
-						<li class='fragment'>
-							Stage-4 - Stage-3 + patch = fast 2.7, fast 3.7
-						</li>
-					</ul>
-				</section>
+			<section>
+				<h2>Final status</h2>
+				<ul>
+					<li class='fragment'>
+						Applies only to HTTPS
+					</li>
+					<li class='fragment'>
+						Stage-0 - laptop setup = unpredictable 2.7 + 3.7
+					</li>
+					<li class='fragment'>
+						Stage-1 - Baseline = fast 2.7 + 3.7
+					</li>
+					<li class='fragment'>
+						Stage-2 - Stage-1 + pyopenssl = slow 2.7 + 3.7
+					</li>
+					<li class='fragment'>
+						Stage-3 - Stage-2 + gevent-openssl = fast 2.7, slow 3.7
+					</li>
+					<li class='fragment'>
+						Stage-4 - Stage-3 + patch = fast 2.7, fast 3.7
+					</li>
+				</ul>
+			</section>
 
-				<section>
-					<img src="./images/grequests-stage-5-slap.jpg" style="top:0;left:0;">
-				</section>
+			<section>
+				<img src="./images/grequests-stage-5-slap.jpg" style="top:0;left:0;">
+			</section>
 
-				<section>
-					<img src="./images/grequests-its-over.jpg" style="top:0;left:0;">
-				</section>
+			<section>
+				<img src="./images/grequests-its-over.jpg" style="top:0;left:0;">
+			</section>
 
-				<section>
-					<h2>Takeaways</h2>
-					<ul>
-						<li class='fragment'>
-							Visualize code flow
-						</li>
-						<li class='fragment'>
-							Profile + trace your code
-						</li>
-						<li class='fragment'>
-							Isolate scenarios
-						</li>
-						<li class='fragment'>
-							Share your learnings
-						</li>
-					</ul>
-				</section>
+			<section>
+				<h2>Takeaways</h2>
+				<ul>
+					<li class='fragment'>
+						Visualize code flow
+					</li>
+					<li class='fragment'>
+						Profile + trace your code
+					</li>
+					<li class='fragment'>
+						Isolate scenarios
+					</li>
+					<li class='fragment'>
+						Share your learnings
+					</li>
+				</ul>
+			</section>
 
-				<section>
-					<h2>Q & A</h2>
-					<p>
-						<small>
-							<a href="mailto:saurabh.hirani@gmail.com">saurabh.hirani@gmail.com</a>
-							/ <a href="http://twitter.com/sphirani">@sphirani </a>
-						</small>
-					</p>
-				</section>
-			</div>
+			<section>
+				<h2>Q & A</h2>
+				<p>
+					<small>
+						<a href="mailto:saurabh.hirani@gmail.com">saurabh.hirani@gmail.com</a>
+						/ <a href="http://twitter.com/sphirani">@sphirani </a>
+					</small>
+				</p>
+			</section>
+		</div>
 
-			<script src="../../lib/js/head.min.js"></script>
-			<script src="../../js/reveal.js"></script>
+		<script src="../../lib/js/head.min.js"></script>
+		<script src="../../js/reveal.js"></script>
 
-			<script>
+		<script>
 
 			// Full list of configuration options available at:
 			// https://github.com/hakimel/reveal.js#configuration
@@ -784,5 +836,5 @@
 			});
 
 		</script>
-		</body>
-	</html>
+	</body>
+</html>
