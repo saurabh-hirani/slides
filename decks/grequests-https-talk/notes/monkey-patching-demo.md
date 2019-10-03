@@ -3,14 +3,12 @@
 ```
 $ python
 
->>> import inspect
->>> import socket
+import inspect
+import socket
 
->>> print(socket.socket)
-<class 'socket._socketobject'>
+print(socket.socket)
 
->>> inspect.getsourcefile(socket.ssl)
-'/usr/local/Cellar/python@2/2.7.15_3/Frameworks/Python.framework/Versions/2.7/lib/python2.7/socket.py'
+inspect.getsourcefile(socket.ssl)
 
 >>> exit()
 ```
@@ -18,58 +16,36 @@ $ python
 ```
 $ python
 
->>> from gevent import monkey
->>> monkey.patch_all()
->>> import inspect
->>> import socket
+from gevent import monkey
+monkey.patch_all()
+import inspect
+import socket
 
->>> print(socket.socket)
-<class 'gevent._socket2.socket'>
+print(socket.socket)
 
->>> inspect.getsourcefile(socket.ssl)
-'/usr/local/lib/python2.7/site-packages/gevent/_socket2.py'
+inspect.getsourcefile(socket.ssl)
 
->>> exit()
+exit()
 ```
 
 ```
 $ cd monkey_patching_demo
 
-$ cat mysocket.py
+$ cat blocking_socket.py
 
-def f1():
-  print("f1")
+$ cat non_blocking_socket.py
 
-$ cat patched_socket.py
+$ cat call_blocking_socket.py
 
-def f1():
-  print("patched f1")
+$ python call_blocking_socket.py
 
-$ cat call_mysocket.py
+I will block
 
-import mysocket
-mysocket.f1()
+$ cat patch_and_call_blocking_socket.py
 
-$ python call_mysocket.py
+$ python patch_and_call_blocking_socket.py
 
-f1
-
-$ cat patch_and_call_mysocket.py
-
-import patcher
-patcher.patch_all()
-
-import mysocket
-mysocket.f1()
-
-$ python patch_and_call_mysocket.py
-
-patched f1
+I won't block
 
 $ cat patcher.py
-
-def patch_all():
-  import mysocket
-  import patched_socket
-  mysocket.f1 = patched_socket.f1
 ```

@@ -1,4 +1,4 @@
-### Python2.7 uses recv
+### Python3.7 uses recv_into
 
 ```shell
 

@@ -1,7 +1,9 @@
 ### Stage-2
 
 ```shell
-cat requirements.txt
+cat stages/02/python27/requirements.txt
+
+cat stages/02/python37/requirements.txt
 
 ./docker-exec.sh test_grequests_python27_2 \
  /usr/local/bin/python /app/test_grequests_v1.py \
