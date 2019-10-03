@@ -3,6 +3,6 @@
 ```shell
 ./docker-exec.sh test_grequests_python27_1 \
 /usr/local/bin/python /app/test_grequests_v1.py \
---url https://https_server:8081/delay/1 --url-count 10 \
+--url https://https_server:8081/delay/1 --url-count 5 \
 --socket-class
 ```

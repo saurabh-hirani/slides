@@ -31,28 +31,28 @@ docker-compose --project-name test_grequests up \
 ### Python2.7 HTTP Demo
 
 ```shell
-python2 ./bin/test_grequests_v1.py --url http://localhost:8081/delay/1 --url-count 10
-python2 ./bin/test_grequests_v1.py --url http://localhost:8081/delay/1 --url-count 100
+python2 ./bin/test_grequests_v1.py --url http://localhost:8081/delay/1 --url-count 5
+python2 ./bin/test_grequests_v1.py --url http://localhost:8081/delay/1 --url-count 50
 ```
 
 ### Python2.7 HTTPS Demo
 
 ```shell
-python2 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/1 --url-count 10
-python2 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/0.1 --url-count 100
+python2 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/1 --url-count 5
+python2 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/0.1 --url-count 50
 ```
 
 ### Python3.7 HTTP Demo
 
 ```shell
-python3 ./bin/test_grequests_v1.py --url http://localhost:8081/delay/1 --url-count 10
+python3 ./bin/test_grequests_v1.py --url http://localhost:8081/delay/1 --url-count 5
 ```
 
 ### Python3.7 HTTPS Demo
 
 ```shell
-python3 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/1 --url-count 10
-python3 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/0.1 --url-count 100
+python3 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/1 --url-count 5
+python3 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/0.1 --url-count 50
 ```
 
 ### Monkey patching demo
@@ -93,8 +93,8 @@ cat patcher.py
 ### Stage-0
 
 ```shell
-python2 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/1 --url-count 10
-python3 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/1 --url-count 10
+python2 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/1 --url-count 5
+python3 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/1 --url-count 5
 ```
 
 ### Stage-1
@@ -105,21 +105,21 @@ cat requirements.txt
 ./docker-exec.sh test_grequests_python27_1 \
 /usr/local/bin/python /app/test_grequests_v2.py \
 --log-level DEBUG \
---url https://https_server:8081/delay/1 --url-count 10
+--url https://https_server:8081/delay/1 --url-count 5
 
 ./docker-exec.sh test_grequests_python37_1 \
 /usr/local/bin/python /app/test_grequests_v2.py \
 --log-level DEBUG \
---url https://https_server:8081/delay/1 --url-count 10
+--url https://https_server:8081/delay/1 --url-count 5
 
 ./docker-exec.sh test_grequests_python27_1 \
  /usr/local/bin/python /app/test_grequests_v2.py \
- --url https://https_server:8081/delay/1 --url-count 10 \
+ --url https://https_server:8081/delay/1 --url-count 5 \
  --profile-code --profile-stats-count 20
 
 ./docker-exec.sh test_grequests_python37_1 \
  /usr/local/bin/python /app/test_grequests_v2.py \
- --url https://https_server:8081/delay/1 --url-count 10 \
+ --url https://https_server:8081/delay/1 --url-count 5 \
  --profile-code --profile-stats-count 20
 ```
 
@@ -137,21 +137,21 @@ cat requirements.txt
 ./docker-exec.sh test_grequests_python27_2 \
 /usr/local/bin/python /app/test_grequests_v2.py \
 --log-level DEBUG \
---url https://https_server:8081/delay/1 --url-count 10
+--url https://https_server:8081/delay/1 --url-count 5
 
 ./docker-exec.sh test_grequests_python37_2 \
 /usr/local/bin/python /app/test_grequests_v2.py \
 --log-level DEBUG \
---url https://https_server:8081/delay/1 --url-count 10
+--url https://https_server:8081/delay/1 --url-count 5
 
 ./docker-exec.sh test_grequests_python27_2 \
  /usr/local/bin/python /app/test_grequests_v2.py \
- --url https://https_server:8081/delay/1 --url-count 10 \
+ --url https://https_server:8081/delay/1 --url-count 5 \
  --profile-code --profile-stats-count 20
 
 ./docker-exec.sh test_grequests_python37_2 \
  /usr/local/bin/python /app/test_grequests_v2.py \
- --url https://https_server:8081/delay/1 --url-count 10 \
+ --url https://https_server:8081/delay/1 --url-count 5 \
  --profile-code --profile-stats-count 20
 ```
 
@@ -218,7 +218,7 @@ exit()
 ```shell
 ./docker-exec.sh test_grequests_python27_1 \
 /usr/local/bin/python /app/test_grequests_v2.py \
---url https://https_server:8081/delay/1 --url-count 10 \
+--url https://https_server:8081/delay/1 --url-count 5 \
 --socket-class
 ```
 
@@ -227,6 +227,6 @@ exit()
 ```shell
 ./docker-exec.sh test_grequests_python27_2 \
 /usr/local/bin/python /app/test_grequests_v2.py \
---url https://https_server:8081/delay/1 --url-count 10 \
+--url https://https_server:8081/delay/1 --url-count 5 \
 --socket-class
 ```
