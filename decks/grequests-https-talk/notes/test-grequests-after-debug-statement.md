@@ -1,6 +1,5 @@
-### Test grequests
+### Test grequests after debug statement
 
 ```shell
-cat ./bin/test-grequests.py
 python2 ./bin/test-grequests.py https 3
 ```
