@@ -10,7 +10,7 @@ print(socket.socket)
 
 inspect.getsourcefile(socket.ssl)
 
->>> exit()
+exit()
 ```
 
 ```

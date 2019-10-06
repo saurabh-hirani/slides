@@ -1,7 +1,7 @@
 ### Trace Python2.7 code
 
-```shell
-python2 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/1 --url-count 5 --trace
+```
+STAGE=0 PYVERSIONS=27 PROTO=https COUNT=3 TRACE=1 ./bin/run-stages.sh 2>&1 > stages/00/python27-trace.txt
 less stages/00/python2.7-trace.txt
 
 # /usr/local/lib/python2.7/site-packages/OpenSSL/SSL.py:1713:send

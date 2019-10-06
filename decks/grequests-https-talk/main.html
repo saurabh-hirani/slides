@@ -6,15 +6,14 @@
 		<title>The curious case of slow/fast grequests code</title>
 
 		<meta name="description" content="The curious case of slow/fast grequests
-			code">
+				code">
 		<meta name="author" content="Saurabh Hirani">
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style"
-			content="black-translucent">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,
-			maximum-scale=1.0, user-scalable=no, minimal-ui">
+				maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="../../css/reveal.css">
 		<link rel="stylesheet" href="../../css/theme/beige.css" id="theme">
@@ -24,20 +23,20 @@
 
 		<!-- Printing and PDF exports -->
 		<script>
-			var link = document.createElement( 'link' );
+			var link = document.createElement('link');
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
+			link.href = window.location.search.match(/print-pdf/gi) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
+			document.getElementsByTagName('head')[0].appendChild(link);
 		</script>
 		<style>
-		input[type=checkbox] {
-    		transform: scale(2);
-		}
+			input[type=checkbox] {
+				transform: scale(2);
+			}
 		</style>
 		<!--[if lt IE 9]>
-		<script src="../../lib/js/html5shiv.js"></script>
-		<![endif]-->
+			<script src="../../lib/js/html5shiv.js"></script>
+			<![endif]-->
 	</head>
 
 	<body>
@@ -167,25 +166,7 @@
 					</ul>
 				</section>
 
-				<!--
-				<section>
-					<h2>problem after using grequests</h2>
-					<ul>
-						<li class='fragment'>
-							Python 2.7 / Python 3.7 + <b>HTTP</b> - fast
-						</li>
-						<li class='fragment'>
-							Python 3.7 + <b>HTTPS</b> - fast
-						</li>
-						<li class='fragment'>
-							Python 2.7 + <b>HTTPS</b> - slow
-						</li>
-						<li class='fragment'>
-							Why - Python2.7 + <b>HTTPS</b> - slow?
-						</li>
-					</ul>
-				</section>
-				-->
+
 				<section>
 					<h2>Local setup</h2>
 					<ul>
@@ -196,12 +177,47 @@
 							HTTPS server
 						</li>
 						<li class='fragment'>
-							Powered by <a href="https://github.com/mccutchen/go-httpbin"
-								target="_blank">go-httpbin</a>
+							Powered by <a href="https://github.com/mccutchen/go-httpbin" target="_blank">go-httpbin</a>
 						</li>
 					</ul>
 				</section>
 
+				<!--
+					<section>
+						<h2>Stage-0 - Trigger</h2>
+						<ul>
+							<li class='fragment' data-fragment-index="1">
+								<a href="./notes/test-requests.md" target="_blank">
+									requests demo
+								</a>
+								- <span class='fragment' data-fragment-index="2" style="color: darkred">
+									slow
+								</span>
+							</li>
+							<li class='fragment' data-fragment-index="3">
+								<a href="./notes/test-grequests.md" target="_blank">
+									grequests demo
+								</a>
+								- <span class='fragment' data-fragment-index="4" style="color: darkred">
+									slow
+								</span>
+							</li>
+							<li class='fragment' data-fragment-index="4">
+								<a href="./notes/test-gevent_requests.md" target="_blank">
+									gevent + requests demo
+								</a>
+								- <span class='fragment' data-fragment-index="5" style="color:
+									darkgreen">
+									fast
+								</span>
+							</li>
+							<span class='fragment'>
+								<img src="./images/grequests-github-header.png"
+									style="top:0;left:0;">
+							</span>
+						</ul>
+					</section>
+					-->
 				<section>
 					<h2>Stage-0 - Trigger</h2>
 					<ul>
@@ -209,62 +225,42 @@
 							<a href="./notes/test-requests.md" target="_blank">
 								requests demo
 							</a>
-							- <span class='fragment' data-fragment-index="2" style="color: darkred">
-								slow
+							-
+							<span class='fragment' data-fragment-index="2">
+								Python 2.7 / Python 3.7 - <span style='color: darkred'>slow</span>
 							</span>
 						</li>
 						<li class='fragment' data-fragment-index="3">
 							<a href="./notes/test-grequests.md" target="_blank">
 								grequests demo
 							</a>
-							- <span class='fragment' data-fragment-index="4" style="color: darkred">
-								slow
+							-
+							<span class='fragment' data-fragment-index="4">
+								Python 2.7 - <span style='color: darkred'>slow,</span>
+							</span>
+							<span class='fragment' data-fragment-index="5">
+								Python 3.7 - <span style='color: darkgreen'>fast</span>
 							</span>
 						</li>
-						<li class='fragment' data-fragment-index="4">
-							<a href="./notes/test-gevent_requests.md" target="_blank">
-								gevent + requests demo
-							</a>
-							- <span class='fragment' data-fragment-index="5" style="color:
-								darkgreen">
-								fast
-							</span>
-						</li>
-						<span class='fragment'>
-							<img src="./images/grequests-github-header.png"
-								style="top:0;left:0;">
-						</span>
 					</ul>
-				</section>
-
-				<section>
-					<img src="./images/fry-gevent-and-requests-is-not-grequests.jpg"
-						style="top:0;left:0;">
 				</section>
 
 				<section>
 					<h2>Add debug statements</h2>
 					<ul>
 						<li class='fragment'>
-							grequests - open concurrently, send serially
+							Python2.7 - open concurrently, send serially
 						</li>
 						<li class='fragment'>
-							gevent + requests - open concurrently, send concurrently
+							Python3.7 - open concurrently, send concurrently
 						</li>
 						<li class='fragment'>
 							<a href="./notes/patch-urllib3.md" target="_blank">Patch urllib3 with a
 								debugging statement</a>
 						</li>
 						<li class='fragment'>
-							<a href="./notes/test-grequests-after-debug-statement.md"
-								target="_blank">
+							<a href="./notes/test-grequests-after-debug-statement.md" target="_blank">
 								grequests demo
-							</a>
-						</li>
-						<li class='fragment'>
-							<a href="./notes/test-gevent_requests-after-debug-statement.md"
-								target="_blank">
-								gevent + requests demo
 							</a>
 						</li>
 					</ul>
@@ -274,14 +270,14 @@
 				<section>
 					<h2>What we had - requests</h2>
 					<!--
-					<ul>
-						<li class='fragment'>Client: Open a connection to the server.</li>
-						<li class='fragment'>Client: Send GET request.</li>
-						<li class='fragment'>Client: Wait for server to respond.</li>
-						<li class='fragment'>Server: Sends response.</li>
-						<li class='fragment'>Client: Repeat same activity for all URLs.</li>
-					</ul>
-					-->
+						<ul>
+							<li class='fragment'>Client: Open a connection to the server.</li>
+							<li class='fragment'>Client: Send GET request.</li>
+							<li class='fragment'>Client: Wait for server to respond.</li>
+							<li class='fragment'>Server: Sends response.</li>
+							<li class='fragment'>Client: Repeat same activity for all URLs.</li>
+						</ul>
+						-->
 				</section>
 
 				<section data-transition="none">
@@ -329,7 +325,7 @@
 				</section>
 
 				<section>
-					<h2>Python 2.7 + HTTPS</h2>
+					<h2>grequests + HTTPS</h2>
 					<table class="reveal">
 						<thead>
 							<tr>
@@ -359,79 +355,69 @@
 				</section>
 
 				<section>
-					<h2>What we wanted - gevent + requests flow</h2>
+					<h2>What we wanted - Python3.7 grequests flow</h2>
 					<!--
-					<ul>
-						<li class='fragment'>Client: Open a connection to the server.</li>
-						<li class='fragment'>Client: Send GET request.</li>
-						<li class='fragment'>Client: I am not waiting, here's a callback - fire it when the server responds.</li>
-						<li class='fragment'>Client: Repeat same activity for all URLs.</li>
-						<li class='fragment'>Client: Waits for response(s).</li>
-						<li class='fragment'>Server: Sends responses (unordered).</li>
-					</ul>
-					-->
+						<ul>
+							<li class='fragment'>Client: Open a connection to the server.</li>
+							<li class='fragment'>Client: Send GET request.</li>
+							<li class='fragment'>Client: I am not waiting, here's a callback - fire it when the server responds.</li>
+							<li class='fragment'>Client: Repeat same activity for all URLs.</li>
+							<li class='fragment'>Client: Waits for response(s).</li>
+							<li class='fragment'>Server: Sends responses (unordered).</li>
+						</ul>
+						-->
 				</section>
 
 				<section data-transition="none">
-					<img src="./images/python-gevent_requests-flow-0.png"
-						style="top:0;left:0;">
+					<img src="./images/python-gevent_requests-flow-0.png" style="top:0;left:0;">
 				</section>
 
 				<!--
 
+					<section data-transition="none">
+						<img src="./images/python-gevent_requests-flow-invalid-1.png"
+							style="top:0;left:0;">
+					</section>
+
+					<section data-transition="none">
+						<img src="./images/python-gevent_requests-flow-invalid-2.png"
+							style="top:0;left:0;">
+					</section>
+					-->
 				<section data-transition="none">
-					<img src="./images/python-gevent_requests-flow-invalid-1.png"
-						style="top:0;left:0;">
+					<img src="./images/python-gevent_requests-flow-1.png" style="top:0;left:0;">
 				</section>
 
 				<section data-transition="none">
-					<img src="./images/python-gevent_requests-flow-invalid-2.png"
-						style="top:0;left:0;">
-				</section>
-				-->
-				<section data-transition="none">
-					<img src="./images/python-gevent_requests-flow-1.png"
-						style="top:0;left:0;">
+					<img src="./images/python-gevent_requests-flow-2.png" style="top:0;left:0;">
 				</section>
 
 				<section data-transition="none">
-					<img src="./images/python-gevent_requests-flow-2.png"
-						style="top:0;left:0;">
+					<img src="./images/python-gevent_requests-flow-3.png" style="top:0;left:0;">
 				</section>
 
 				<section data-transition="none">
-					<img src="./images/python-gevent_requests-flow-3.png"
-						style="top:0;left:0;">
+					<img src="./images/python-gevent_requests-flow-4.png" style="top:0;left:0;">
 				</section>
 
 				<section data-transition="none">
-					<img src="./images/python-gevent_requests-flow-4.png"
-						style="top:0;left:0;">
+					<img src="./images/python-gevent_requests-flow-5.png" style="top:0;left:0;">
 				</section>
 
 				<section data-transition="none">
-					<img src="./images/python-gevent_requests-flow-5.png"
-						style="top:0;left:0;">
+					<img src="./images/python-gevent_requests-flow-6.png" style="top:0;left:0;">
 				</section>
 
 				<section data-transition="none">
-					<img src="./images/python-gevent_requests-flow-6.png"
-						style="top:0;left:0;">
+					<img src="./images/python-gevent_requests-flow-7.png" style="top:0;left:0;">
 				</section>
 
 				<section data-transition="none">
-					<img src="./images/python-gevent_requests-flow-7.png"
-						style="top:0;left:0;">
+					<img src="./images/python-gevent_requests-flow-8.png" style="top:0;left:0;">
 				</section>
 
 				<section data-transition="none">
-					<img src="./images/python-gevent_requests-flow-8.png"
-						style="top:0;left:0;">
-				</section>
-
-				<section data-transition="none">
-					<img src="./images/python-gevent_requests-flow-9.png"
-						style="top:0;left:0;">
+					<img src="./images/python-gevent_requests-flow-9.png" style="top:0;left:0;">
 				</section>
 
 				<section>
@@ -442,7 +428,7 @@
 								<th>Sr. No.</th>
 								<th>n</th>
 								<th>requests</th>
-								<th>gevent + requests</th>
+								<th>Python3.7 grequests</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -469,59 +455,51 @@
 				</section>
 
 				<section>
-					<h2>What we got - grequests</h2>
+					<h2>What we got - Python2.7 grequests flow</h2>
 				</section>
 
 				<section data-transition="none">
-					<img src="./images/python-grequests-flow-0.png"
-						style="top:0;left:0;">
+					<img src="./images/python-grequests-flow-0.png" style="top:0;left:0;">
 				</section>
 
 				<section data-transition="none">
-					<img src="./images/python-grequests-flow-1.png"
-						style="top:0;left:0;">
+					<img src="./images/python-grequests-flow-1.png" style="top:0;left:0;">
 				</section>
 
 				<section data-transition="none">
-					<img src="./images/python-grequests-flow-2.png"
-						style="top:0;left:0;">
+					<img src="./images/python-grequests-flow-2.png" style="top:0;left:0;">
 				</section>
 
 				<section data-transition="none">
-					<img src="./images/python-grequests-flow-3.png"
-						style="top:0;left:0;">
+					<img src="./images/python-grequests-flow-3.png" style="top:0;left:0;">
 				</section>
 
 				<section data-transition="none">
-					<img src="./images/python-grequests-flow-4.png"
-						style="top:0;left:0;">
+					<img src="./images/python-grequests-flow-4.png" style="top:0;left:0;">
 				</section>
 
 				<section data-transition="none">
-					<img src="./images/python-grequests-flow-5.png"
-						style="top:0;left:0;">
+					<img src="./images/python-grequests-flow-5.png" style="top:0;left:0;">
 				</section>
 
 				<section data-transition="none">
-					<img src="./images/python-grequests-flow-6.png"
-						style="top:0;left:0;">
+					<img src="./images/python-grequests-flow-6.png" style="top:0;left:0;">
 				</section>
 
 				<section data-transition="none">
-					<img src="./images/python-grequests-flow-7.png"
-						style="top:0;left:0;">
+					<img src="./images/python-grequests-flow-7.png" style="top:0;left:0;">
 				</section>
 
 				<section>
-					<h2>Python 2.7 + HTTPS</h2>
+					<h2>grequests + HTTPS</h2>
 					<table class="reveal">
 						<thead>
 							<tr>
 								<th>Sr. No.</th>
 								<th>n</th>
 								<th>requests</th>
-								<th>gevent + requests</th>
-								<th>grequests</th>
+								<th>Python2.7 grequests</th>
+								<th>Python3.7 grequests</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -529,57 +507,69 @@
 								<td>1.</td>
 								<td>3</td>
 								<td>3.30</td>
-								<td>1.20</td>
 								<td>3.30</td>
+								<td>1.20</td>
 							</tr>
 							<tr>
 								<td>2.</td>
 								<td>5</td>
 								<td>5.50</td>
-								<td>1.30</td>
 								<td>5.50</td>
+								<td>1.30</td>
 							</tr>
 							<tr>
 								<td>3.</td>
 								<td>10</td>
 								<td>11</td>
-								<td>1.55</td>
 								<td>11</td>
+								<td>1.55</td>
 							</tr>
 						</tbody>
 					</table>
 				</section>
 
 				<section>
-					<h2>What is grequests doing wrong?</h2>
+					<h2>What's going on?</h2>
 					<ul>
 						<li class='fragment'>
-							requests =
-							<span class='fragment'>send,</span>
-							<span class='fragment'>block,</span>
-							<span class='fragment'>recv,</span>
-							<span class='fragment'>send,</span>
-							<span class='fragment'>block,</span>
-							<span class='fragment'>recv</span>
+							requests
+							<ul>
+								<li class='fragment'>
+									<span class='fragment'>send,</span>
+									<span class='fragment'>block,</span>
+									<span class='fragment'>recv,</span>
+									<span class='fragment'>send,</span>
+									<span class='fragment'>block,</span>
+									<span class='fragment'>recv</span>
+								</li>
+							</ul>
 						</li>
 						<li class='fragment'>
-							gevent + requests =
-							<span class='fragment'>send,</span>
-							<span class='fragment'>send,</span>
-							<span class='fragment'>block,</span>
-							<span class='fragment'>recv,</span>
-							<span class='fragment'>recv</span>
+							Python3.7 grequests
+							<ul>
+								<li class='fragment'>
+									<span class='fragment'>send,</span>
+									<span class='fragment'>send,</span>
+									<span class='fragment'>block,</span>
+									<span class='fragment'>recv,</span>
+									<span class='fragment'>recv</span>
+								</li>
+							</ul>
 						</li>
 						<li class='fragment'>
-							grequests =
-							<span class='fragment'>open,</span>
-							<span class='fragment'>open,</span>
-							<span class='fragment'>send,</span>
-							<span class='fragment'>block,</span>
-							<span class='fragment'>recv,</span>
-							<span class='fragment'>send,</span>
-							<span class='fragment'>block,</span>
-							<span class='fragment'>recv</span>
+							Python2.7 grequests
+							<ul>
+								<li class='fragment'>
+									<span class='fragment'>open,</span>
+									<span class='fragment'>open,</span>
+									<span class='fragment'>send,</span>
+									<span class='fragment'>block,</span>
+									<span class='fragment'>recv,</span>
+									<span class='fragment'>send,</span>
+									<span class='fragment'>block,</span>
+									<span class='fragment'>recv</span>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</section>
@@ -592,45 +582,44 @@
 						<li class='fragment'>But if you don't reveal yourself...</li>
 					</ul>
 					<span class='fragment'>
-						<img src="./images/liam-neeson-i-will-trace-you-profile-you.jpg"
-							style="top:0;left:0;">
+						<img src="./images/liam-neeson-i-will-trace-you-profile-you.jpg" style="top:0;left:0;">
 					</span>
 				</section>
 
 				<!--
 
-				<section>
-					<h2>Profiling and tracing</h2>
-					<ul>
-						<li class='fragment'>
-							<a
-								href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test-gevent_requests.py"
-								target="_blank">
-								test-gevent_requests.py
-							</a>
-							to
-							<a
-								href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test_gevent-requests_v1.py"
-								target="_blank">
-								test_gevent-requests_v1.py
-							</a>
-						</li>
-						<li class='fragment'>
-							<a
-								href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test-grequests.py"
-								target="_blank">
-								test-grequests.py
-							</a>
-							to
-							<a
-								href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test_grequests_v1.py"
-								target="_blank">
-								test_grequests_v1.py
-							</a>
-						</li>
-					</ul>
-				</section>
-				-->
+					<section>
+						<h2>Profiling and tracing</h2>
+						<ul>
+							<li class='fragment'>
+								<a
+									href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test-gevent_requests.py"
+									target="_blank">
+									test-gevent_requests.py
+								</a>
+								to
+								<a
+									href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test_gevent-requests_v1.py"
+									target="_blank">
+									test_gevent-requests_v1.py
+								</a>
+							</li>
+							<li class='fragment'>
+								<a
+									href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test-grequests.py"
+									target="_blank">
+									test-grequests.py
+								</a>
+								to
+								<a
+									href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test_grequests_v1.py"
+									target="_blank">
+									test_grequests_v1.py
+								</a>
+							</li>
+						</ul>
+					</section>
+					-->
 				<section>
 					<h2>Local setup</h2>
 					<ul>
@@ -647,21 +636,21 @@
 							</a>
 						</li>
 						<!--
-						<li class='fragment'>
-							8 containers
-							<ul>
-								<li>HTTP server</li>
-								<li>HTTPS server</li>
-								<li>test_grequests_$interpreter_$stage</li>
-							</ul>
-						</li>
-						<li class='fragment'>
-							$interpreter = [python27, python37]
-						</li>
-						<li class='fragment'>
-							$stage = [1, 2, 3, 4]
-						</li>
-						-->
+							<li class='fragment'>
+								8 containers
+								<ul>
+									<li>HTTP server</li>
+									<li>HTTPS server</li>
+									<li>test_grequests_$interpreter_$stage</li>
+								</ul>
+							</li>
+							<li class='fragment'>
+								$interpreter = [python27, python37]
+							</li>
+							<li class='fragment'>
+								$stage = [1, 2, 3, 4]
+							</li>
+							-->
 					</ul>
 				</section>
 
@@ -673,6 +662,7 @@
 								<th>Stage</th>
 								<th>Setup</th>
 								<th>Python2.7</th>
+								<th>Python3.7</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -680,10 +670,12 @@
 								<td>0</td>
 								<td>laptop</td>
 								<td style='color: darkred'>slow</td>
+								<td style='color: darkgreen'>fast</td>
 							</tr>
 							<tr>
 								<td>1</td>
 								<td>baseline</td>
+								<td>???</td>
 								<td>???</td>
 							</tr>
 						</tbody>
@@ -691,46 +683,44 @@
 				</section>
 
 				<!--
-				<section>
-					<h2>monkey-patching</h2>
-					<ul>
-						<li class='fragment'>gevent = <span class="fragment" index="0"><b>monkey-patching</b></span> + greenlet + libev</li>
-						<li class='fragment'>Dynamic replacement of attributes at runtime</li>
-						<li class='fragment'>Replace blocking socket by non-blocking socket</li>
-						<li class='fragment'><a href="https://stackoverflow.com/questions/5626193/what-is-monkey-patching" target="_blank">Stackoverflow explanation</a></li>
-					</ul>
-				</section>
-				<section>
-					<h2>greenlet</h2>
-					<ul>
-						<li class='fragment'>gevent = monkey-patching + <span class="fragment" index="0"><b>greenlet</b></span> + libev</li>
-						<li class='fragment'>C ext, run coroutines, cooperatively scheduled</li>
-						<li class='fragment'>Jump between greenlets using <b>.switch()</b></li>
-						<li class='fragment'><a href="./images/grequests-flow.gif" target="_blank">Stephen Diehl's greenlet visualization</a>, <a href="https://sdiehl.github.io/gevent-tutorial/" target="_blank">tutorial</a></li>
-					</ul>
-				</section>
-				<section>
-					<h2>libev</h2>
-					<ul>
-						<li class='fragment'>gevent = monkey-patching + greenlet + <span class="fragment" index="0"><b>libev</b></span></li>
-						<li class='fragment'>High performance event loop</li>
-						<li class='fragment'>Execute callback on events</li>
-					</ul>
-				</section>
-				-->
+					<section>
+						<h2>monkey-patching</h2>
+						<ul>
+							<li class='fragment'>gevent = <span class="fragment" index="0"><b>monkey-patching</b></span> + greenlet + libev</li>
+							<li class='fragment'>Dynamic replacement of attributes at runtime</li>
+							<li class='fragment'>Replace blocking socket by non-blocking socket</li>
+							<li class='fragment'><a href="https://stackoverflow.com/questions/5626193/what-is-monkey-patching" target="_blank">Stackoverflow explanation</a></li>
+						</ul>
+					</section>
+					<section>
+						<h2>greenlet</h2>
+						<ul>
+							<li class='fragment'>gevent = monkey-patching + <span class="fragment" index="0"><b>greenlet</b></span> + libev</li>
+							<li class='fragment'>C ext, run coroutines, cooperatively scheduled</li>
+							<li class='fragment'>Jump between greenlets using <b>.switch()</b></li>
+							<li class='fragment'><a href="./images/grequests-flow.gif" target="_blank">Stephen Diehl's greenlet visualization</a>, <a href="https://sdiehl.github.io/gevent-tutorial/" target="_blank">tutorial</a></li>
+						</ul>
+					</section>
+					<section>
+						<h2>libev</h2>
+						<ul>
+							<li class='fragment'>gevent = monkey-patching + greenlet + <span class="fragment" index="0"><b>libev</b></span></li>
+							<li class='fragment'>High performance event loop</li>
+							<li class='fragment'>Execute callback on events</li>
+						</ul>
+					</section>
+					-->
 				<section>
 					<h2>Stage-1 - Baseline</h2>
 					<ul>
 						<li class='fragment' data-fragment-index="1">
 							Demo code -
-							<a
-								href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test-grequests.py"
+							<a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test-grequests.py"
 								target="_blank">
 								test-grequests.py
 							</a>
 							to
-							<a
-								href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test_grequests_v1.py"
+							<a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test_grequests_v1.py"
 								target="_blank">
 								test_grequests_v1.py
 							</a>
@@ -746,9 +736,9 @@
 						</li>
 						<li class='fragment' data-fragment-index="5">
 							<a href="./notes/stage-1-demo.md" target="_blank">
-								Python2.7 + HTTPS demo
+								HTTPS demo
 							</a>
-							-
+							- Python2.7, Python3.7
 							<span class='fragment' style="color: darkgreen" data-fragment-index="6">fast</span>
 						</li>
 					</ul>
@@ -760,8 +750,8 @@
 						<thead>
 							<tr>
 								<th>Sr. No.</th>
-								<th>Stage-0</th>
-								<th>Stage-1</th>
+								<th>Python2.7 Stage-0</th>
+								<th>Python2.7 Stage-1</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -783,11 +773,11 @@
 						</tbody>
 					</table>
 					<!--
-					<ul>
-						<li class='fragment'>Stage-0 - socket send/recv calls going to pyopenssl</li>
-						<li class='fragment'>Stage-1 - socket send/recv calls going to gevent</li>
-					</ul>
-				   -->
+						<ul>
+							<li class='fragment'>Stage-0 - socket send/recv calls going to pyopenssl</li>
+							<li class='fragment'>Stage-1 - socket send/recv calls going to gevent</li>
+						</ul>
+					-->
 				</section>
 
 				<section>
@@ -798,6 +788,7 @@
 								<th>Stage</th>
 								<th>Setup</th>
 								<th>Python2.7</th>
+								<th>Python3.7</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -805,15 +796,18 @@
 								<td>0</td>
 								<td>laptop</td>
 								<td style="color: darkred">slow</td>
+								<td style="color: darkgreen">fast</td>
 							</tr>
 							<tr>
 								<td>1</td>
 								<td>baseline</td>
 								<td style="color: darkgreen">fast</td>
+								<td style="color: darkgreen">fast</td>
 							</tr>
 							<tr>
 								<td>2</td>
 								<td>Stage-1 + pyopenssl</td>
+								<td>???</td>
 								<td>???</td>
 							</tr>
 						</tbody>
@@ -824,24 +818,24 @@
 					<h2>Stage-2 - Detect and Verify</h2>
 					<ul>
 						<li class='fragment' data-fragment-index="1">
-							Stage-1 + <a
-								href="https://pyopenssl.org/en/stable/introduction.html#history">
+							Stage-1 + <a href="https://pyopenssl.org/en/stable/introduction.html#history">
 								pyopenssl </a>
 						</li>
 						<li class='fragment' data-fragment-index="2">
 							<a href="./notes/stage-2-demo.md" target="_blank">
-								Python2.7 + HTTPS Demo
+								HTTPS Demo
 							</a>
-							- <span class='fragment' data-fragment-index="3" style="color: darkred">slow</span>
+							- Python2.7, Python3.7
+							<span class='fragment' style="color: darkred" data-fragment-index="3">slow</span>
 						</li>
 						<!--
-						<li class='fragment'>
-							Python 3.7 slow
-						</li>
-						<li class='fragment'>
-							Concurrent conns but send/recv serial
-						</li>
-						-->
+							<li class='fragment'>
+								Python 3.7 slow
+							</li>
+							<li class='fragment'>
+								Concurrent conns but send/recv serial
+							</li>
+							-->
 						<li class='fragment'>
 							pyopenssl overriding gevent socket in some way
 						</li>
@@ -849,100 +843,148 @@
 				</section>
 
 				<section>
-					<h2>gevent basics</h2>
+					<h2>gevent monkey patching</h2>
 					<ul>
 						<li class='fragment'>
 							gevent + monkey-patching = non-blocking socket
 						</li>
-						<li class='fragment'>
-							<a href="./notes/monkey-patching-demo.md" target="_blank">
-								Monkey patching demo
-							</a>
-						</li>
-						<li class='fragment'>
-							<a href="./notes/gevent-basics.md" target="_blank">
-								Details +
-							</a>
-							<a href="https://www.youtube.com/watch?v=GunMToxbE0E">
-								Kavya Joshi's excellent in-depth talk
-							</a>
-						</li>
+						<center>
+							<img class='fragment' src="./images/monkey-patching-demo.png">
+						</center>
+					</ul>
+				</section>
+				<section>
+					<h2>Without monkey patching</h2>
+					<pre><code class="hljs" data-trim data-line-numbers="4,8-9">
+$ python
+
+import inspect
+import socket
+
+print(socket.socket)
+&lt;class 'socket._socketobject'&gt;
+
+inspect.getsourcefile(socket.ssl)
+'/usr/local/Cellar/python@2/2.7.15_3/Frameworks/Python.framework/Versions/2.7/lib/python2.7/socket.py'
+
+exit()
+							</code></pre>
+				</section>
+				<section data-transition="none">
+					<h2>With monkey patching</h2>
+					<pre><code class="hljs" data-trim data-line-numbers="4,8-9">
+$ python
+
+from gevent import monkey
+monkey.patch_all()
+import inspect
+import socket
+
+print(socket.socket)
+&lt;class 'gevent._socket2.socket'&gt;
+
+inspect.getsourcefile(socket.ssl)
+'/usr/local/lib/python2.7/site-packages/gevent/_socket2.py'
+
+exit()
+					</code></pre>
+				</section>
+				<section>
+					<h2>Under the hood</h2>
+					<li class='fragment'>
+						<a href="./notes/monkey-patching-demo.md" target="_blank">
+							Monkey patching demo
+						</a>
+					</li>
+					<li class='fragment'>
+						<a href="./notes/gevent-basics.md" target="_blank">
+							Details
+						</a>
+						+
+						<a href="https://www.youtube.com/watch?v=GunMToxbE0E">
+							Kavya Joshi's excellent in-depth talk
+						</a>
+					</li>
 					</ul>
 				</section>
 
 				<section>
 					<h2>How is pyopenssl making the code slow?</h2>
+				</section>
+
+				<section data-transition="none">
+					<img src="./images/double-monkey-patching-1.png">
+				</section>
+
+				<section data-transition="none">
+					<img src="./images/double-monkey-patching-2.png">
+				</section>
+
+				<section data-transition="none">
+					<img src="./images/double-monkey-patching-3.png">
+				</section>
+
+				<section data-transition="none">
+					<img src="./images/double-monkey-patching-4.png">
+				</section>
+
+
+				<section>
+					<h2>Double monkey patching code flow</h2>
 					<ul>
-						<li class='fragment'>
-							pyopenssl re-patches an already monkey patched lib
-						</li>
-						<li class='fragment'>
+						<li class='fragment' data-fragment-index="2">
 							<a href="./images/grequests-gevent-patching.png" target="_blank">
-								grequests -> gevent -> monkey_patch -> ssl_socket
+								<span class='fragment' data-fragment-index="3">
+									grequests
+								</span>
+								<span class='fragment' data-fragment-index="4">
+									-> gevent
+								</span>
+								<span class='fragment' data-fragment-index="5">
+									-> monkey_patch
+								</span>
+								<span class='fragment' data-fragment-index="6">
+									-> ssl_socket
+								</span>
 							</a>
 						</li>
-						<li class='fragment'>
-							<a href="./images/grequests-pyopenssl-repatching.png"
-								target="_blank">
-								grequests -> requests -> monkey_patch_again -> ssl_socket
+						<li class='fragment' data-fragment-index="7">
+							<a href="./images/grequests-pyopenssl-repatching.png" target="_blank">
+								<span class='fragment' data-fragment-index="8">
+									grequests
+								</span>
+								<span class='fragment' data-fragment-index="9">
+									-> requests
+								</span>
+								<span class='fragment' data-fragment-index="10">
+									-> monkey_patch_again
+								</span>
+								<span class='fragment' data-fragment-index="11">
+									-> ssl_socket
+								</span>
+							</a>
 							</a>
 						</li>
-						<li class='fragment'>
-							<a href="./notes/stage-1-socket-class-without-pyopenssl.md"
-								target="_blank">
+						<li class='fragment' data-fragment-index="12">
+							<a href="./notes/stage-1-socket-class-without-pyopenssl.md" target="_blank">
 								Stage-1 socket class without pyopenssl
 							</a>
 						</li>
-						<li class='fragment'>
-							<a href="./notes/stage-2-socket-class-with-pyopenssl.md"
-								target="_blank">
+						<li class='fragment' data-fragment-index="13">
+							<a href="./notes/stage-2-socket-class-with-pyopenssl.md" target="_blank">
 								Stage-2 socket class with pyopenssl
 							</a>
 						</li>
-						<li class='fragment'>
-							<a href="./images/urllib3-new-conn.png" target="_blank">
-								Concurrent conns but Stage-2 send/recv serial
-							</a>
 						</li>
-					</li>
 				</section>
+				<!--
 
-				<section>
-					<h2>Why pyopenssl?</h2>
-					<ul>
-						<li class='fragment'>requests <b>optionally</b> includes pyopenssl
-							for
-							<a
-								href="https://www.globalsign.com/en/blog/what-is-server-name-indication/"
-								target="_blank">SNI
-							</a> support
-						</li>
-
-						<li class='fragment'>
-							stdlib ssl did not provide SNI in Python 2.7.8 and older
-						</li>
-						<li class='fragment'>
-							pyopenssl provides SNI support
-						</li>
-						<li class='fragment'>
-							stdlib in Python 2.7.9+ - ssl.HAS_SNI flag is True
-						</li>
-						<li class='fragment'>
-							pyopenssl other use cases -
-							<a
-								href="https://www.reddit.com/r/learnpython/comments/4vxdgz/trying_to_figure_out_how_to_use_pyopenssl/"
-								target="_blank">
-								generate root certs
-							</a>,
-							<a
-								href="https://stackoverflow.com/questions/14565597/pyopenssl-reading-certificate-pkey-file/17178852"
-								target="_blank">
-								reading SSL cert
-							</a>
-						</li>
-					</ul>
-				</section>
-
+				<li class='fragment'>
+					<a href="./images/urllib3-new-conn.png" target="_blank">
+						Concurrent conns but Stage-2 send/recv serial
+					</a>
+				</li>
+				-->
 
 				<section>
 					<h2>Solution</h2>
@@ -965,11 +1007,11 @@
 				</section>
 
 				<!--
-				<section>
-					<img src="./images/grequests-sharp-turn-car.jpg"
-						style="top:0;left:0;">
-				</section>
-				-->
+					<section>
+						<img src="./images/grequests-sharp-turn-car.jpg"
+							style="top:0;left:0;">
+					</section>
+					-->
 				<section>
 					<h2>grequests https status</h2>
 					<table class="reveal">
@@ -978,6 +1020,7 @@
 								<th>Stage</th>
 								<th>Setup</th>
 								<th>Python2.7</th>
+								<th>Python3.7</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -985,41 +1028,41 @@
 								<td>0</td>
 								<td>laptop</td>
 								<td style="color: darkred">slow</td>
+								<td style="color: darkgreen">fast</td>
 							</tr>
 							<tr>
 								<td>1</td>
 								<td>baseline</td>
+								<td style="color: darkgreen">fast</td>
 								<td style="color: darkgreen">fast</td>
 							</tr>
 							<tr>
 								<td>2</td>
 								<td>Stage-1 + pyopenssl</td>
 								<td style="color: darkred">slow</td>
+								<td style="color: darkred">slow</td>
 							</tr>
 							<tr>
 								<td>3</td>
 								<td>Stage-2 + gevent-openssl</td>
+								<td>???</td>
 								<td>???</td>
 							</tr>
 						</tbody>
 					</table>
 				</section>
 
-
-
 				<section>
 					<h2>Stage-3 - Fix-1</h2>
 					<ul>
 						<li class='fragment'>
 							Demo code -
-							<a
-								href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test_grequests_v1.py"
+							<a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test_grequests_v1.py"
 								target="_blank">
 								test_grequests_v1.py
 							</a>
 							to
-							<a
-								href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test_grequests_v2.py"
+							<a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test_grequests_v2.py"
 								target="_blank">
 								test_grequests_v2.py
 							</a>
@@ -1036,248 +1079,296 @@
 						</li>
 						<li class='fragment'>
 							Python 3.7 slow!!
-						</a>
-					</li>
-				</ul>
-			</section>
+							</a>
+						</li>
+					</ul>
+				</section>
 
-			<section> <img src="./images/grequests-frustration.jpg"
-					style="top:0;left:0;"> </section>
+				<section> <img src="./images/grequests-frustration.jpg" style="top:0;left:0;"> </section>
 
-			<section>
-				<h2>Why?</h2>
-				<ul>
-					<li class='fragment'>
-						<a href="./notes/python27-uses-recv.md" target="_blank">
-							Python2.7 uses <b>recv</b>
-						</a>
-					</li>
-					<li class='fragment'>
-						<a href="./notes/python37-uses-recv_into.md" target="_blank">
-							Python3.7 uses <b>recv_into</b>
-						</a>
-					</li>
-					<li class='fragment'>
-						gevent-openssl does not override
-						<a
-							href="./notes/gevent-openssl-no-recv_into.md" target="_blank">
-							recv_into
-						</a>
-					</li>
-				</ul>
-			</section>
+				<section>
+					<h2>How is gevent-openssl making Python3.7 HTTPS slow?</h2>
+				</section>
 
-			<section>
-				<h2>grequests https status</h2>
-				<table class="reveal">
-					<thead>
-						<tr>
-							<th>Stage</th>
-							<th>Setup</th>
-							<th>Python2.7</th>
-							<th>Python3.7</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>0</td>
-							<td>laptop</td>
-							<td>slow</td>
-							<td>fast</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>baseline</td>
-							<td>fast</td>
-							<td>fast</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Stage-1 + pyopenssl</td>
-							<td>slow</td>
-							<td>slow</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>Stage-2 + gevent-openssl</td>
-							<td>fast</td>
-							<td>slow</td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>Stage-3 + patch</td>
-							<td>???</td>
-							<td>???</td>
-						</tr>
-					</tbody>
-				</table>
-			</section>
+				<section data-transition="none">
+					<img src="./images/partial-monkey-patching-1.png">
+				</section>
+				<section data-transition="none">
+					<img src="./images/partial-monkey-patching-2.png">
+				</section>
+				<section data-transition="none">
+					<img src="./images/partial-monkey-patching-3.png">
+				</section>
+				<section data-transition="none">
+					<img src="./images/partial-monkey-patching-4.png">
+				</section>
+				<section data-transition="none">
+					<img src="./images/partial-monkey-patching-5.png">
+				</section>
+
+				<section>
+					<h2>Partial monkey patching details</h2>
+					<ul>
+						<li class='fragment'>
+							<a href="./notes/python27-uses-recv.md" target="_blank">
+								Python2.7 uses <b>recv</b>
+							</a>
+						</li>
+						<li class='fragment'>
+							<a href="./notes/python37-uses-recv_into.md" target="_blank">
+								Python3.7 uses <b>recv_into</b>
+							</a>
+						</li>
+						<li class='fragment'>
+							gevent-openssl does not patch
+							<a href="./notes/gevent-openssl-no-recv_into.md" target="_blank">
+								recv_into
+							</a>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>grequests https status</h2>
+					<table class="reveal">
+						<thead>
+							<tr>
+								<th>Stage</th>
+								<th>Setup</th>
+								<th>Python2.7</th>
+								<th>Python3.7</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>0</td>
+								<td>laptop</td>
+								<td style="color: darkred">slow</td>
+								<td style="color: darkgreen">fast</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>baseline</td>
+								<td style="color: darkgreen">fast</td>
+								<td style="color: darkgreen">fast</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>Stage-1 + pyopenssl</td>
+								<td style="color: darkred">slow</td>
+								<td style="color: darkred">slow</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>Stage-2 + gevent-openssl</td>
+								<td style="color: darkgreen">fast</td>
+								<td style="color: darkred">slow</td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>Stage-3 + patch</td>
+								<td>???</td>
+								<td>???</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+				<section>
+					<h2>Stage-4 - Fix-2</h2>
+					<ul>
+						<li class='fragment'>
+							Patch gevent-openssl to add <b>recv_into</b>
+						</li>
+						<li class='fragment'>
+							<a href="./notes/stage-4-before-patching-demo.md" target="_blank">
+								Before patching demo
+							</a>
+						</li>
+						<li class='fragment'>
+							<a href="./notes/stage-4-apply-patch.md" target="_blank">
+								Apply patch
+							</a>
+						</li>
+						<li class='fragment'>
+							<a href="./notes/gevent-openssl-with-recv_into.md" target="_blank">
+								Verify patch
+							</a>
+						</li>
+						<li class='fragment'>
+							<a href="./notes/stage-4-after-patching-demo.md" target="_blank">
+								After patching demo
+							</a>
+						</li>
+
+						<li class='fragment'>
+							<a href="https://github.com/mjs/gevent_openssl/pull/15" target="_blank">
+								PR to fix the issue
+							</a>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>grequests https status</h2>
+					<table class="reveal">
+						<thead>
+							<tr>
+								<th>Stage</th>
+								<th>Setup</th>
+								<th>Python2.7</th>
+								<th>Python3.7</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>0</td>
+								<td>laptop</td>
+								<td style="color: darkred">slow</td>
+								<td style="color: darkgreen">fast</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>baseline</td>
+								<td style="color: darkgreen">fast</td>
+								<td style="color: darkgreen">fast</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>Stage-1 + pyopenssl</td>
+								<td style="color: darkred">slow</td>
+								<td style="color: darkred">slow</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>Stage-2 + gevent-openssl</td>
+								<td style="color: darkgreen">fast</td>
+								<td style="color: darkred">slow</td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>Stage-3 + patch</td>
+								<td style="color: darkgreen">fast</td>
+								<td style="color: darkgreen">fast</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
 
 
 
 
-			<section>
-				<h2>Stage-4 - Fix-2</h2>
-				<ul>
-					<li class='fragment'>
-						Patch gevent-openssl to add <b>recv_into</b>
-					</li>
-					<li class='fragment'>
-						<a href="./notes/stage-4-before-patching-demo.md" target="_blank">
-							Before patching demo
-						</a>
-					</li>
-					<li class='fragment'>
-						<a href="./notes/stage-4-apply-patch.md" target="_blank">
-							Apply patch
-						</a>
-					</li>
-					<li class='fragment'>
-						<a
-							href="./notes/gevent-openssl-with-recv_into.md" target="_blank">
-							Verify patch
-						</a>
-					</li>
-					<li class='fragment'>
-						<a href="./notes/stage-4-after-patching-demo.md" target="_blank">
-							After patching demo
-						</a>
-					</li>
+				<section>
+					<img src="./images/grequests-stage-5-slap.jpg" style="top:0;left:0;">
+				</section>
 
-					<li class='fragment'>
-						<a href="https://github.com/mjs/gevent_openssl/pull/15"
-							target="_blank">
-							PR to fix the issue
-						</a>
-					</li>
-				</ul>
-			</section>
+				<section>
+					<img src="./images/grequests-its-over.jpg" style="top:0;left:0;">
+				</section>
 
-			<section>
-				<h2>grequests https status</h2>
-				<table class="reveal">
-					<thead>
-						<tr>
-							<th>Stage</th>
-							<th>Setup</th>
-							<th>Python2.7</th>
-							<th>Python3.7</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>0</td>
-							<td>laptop</td>
-							<td>slow</td>
-							<td>fast</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>baseline</td>
-							<td>fast</td>
-							<td>fast</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Stage-1 + pyopenssl</td>
-							<td>slow</td>
-							<td>slow</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>Stage-2 + gevent-openssl</td>
-							<td>fast</td>
-							<td>slow</td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>Stage-3 + patch</td>
-							<td>fast</td>
-							<td>fast</td>
-						</tr>
-					</tbody>
-				</table>
-			</section>
+				<section>
+					<h2>Takeaways</h2>
+					<ul>
+						<li class='fragment'>
+							Visualize code flow
+						</li>
+						<li class='fragment'>
+							Profile + trace your code
+						</li>
+						<li class='fragment'>
+							Isolate scenarios
+						</li>
+						<li class='fragment'>
+							Share your learnings
+						</li>
+					</ul>
+				</section>
 
+				<section>
+					<h2>Q & A</h2>
+					<p>
+						<small>
+							<a href="mailto:saurabh.hirani@gmail.com">saurabh.hirani@gmail.com</a>
+							/ <a href="http://twitter.com/sphirani">@sphirani </a>
+						</small>
+					</p>
+				</section>
 
+				<section>
+					<h2>Why pyopenssl?</h2>
+					<ul>
+						<li class='fragment'>requests <b>optionally</b> includes pyopenssl
+							for
+							<a href="https://www.globalsign.com/en/blog/what-is-server-name-indication/"
+								target="_blank">SNI
+							</a> support
+						</li>
 
+						<li class='fragment'>
+							stdlib ssl did not provide SNI in Python 2.7.8 and older
+						</li>
+						<li class='fragment'>
+							pyopenssl provides SNI support
+						</li>
+						<li class='fragment'>
+							stdlib in Python 2.7.9+ - ssl.HAS_SNI flag is True
+						</li>
+						<li class='fragment'>
+							pyopenssl other use cases -
+							<a href="https://www.reddit.com/r/learnpython/comments/4vxdgz/trying_to_figure_out_how_to_use_pyopenssl/"
+								target="_blank">
+								generate root certs
+							</a>,
+							<a href="https://stackoverflow.com/questions/14565597/pyopenssl-reading-certificate-pkey-file/17178852"
+								target="_blank">
+								reading SSL cert
+							</a>
+						</li>
+					</ul>
+				</section>
 
-			<section>
-				<img src="./images/grequests-stage-5-slap.jpg" style="top:0;left:0;">
-			</section>
+				<section>
+					<h2>grequests =~ gevent + requests?</h2>
+					<ul>
+						<li class='fragment'>No</li>
+						<li class='fragment'>grequests monkey.patch_all skips <b>select</b></li>
+						<li class='fragment'>gevent.monkey.patch_all() patches all stdlib</li>
+						<li class='fragment'>pyopenssl calls urllib3 wait - which calls select</li>
+						<li class='fragment'>Unpatched select is blocking</li>
+					</ul>
+				</section>
 
-			<section>
-				<img src="./images/grequests-its-over.jpg" style="top:0;left:0;">
-			</section>
+			</div>
 
-			<section>
-				<h2>Takeaways</h2>
-				<ul>
-					<li class='fragment'>
-						Visualize code flow
-					</li>
-					<li class='fragment'>
-						Profile + trace your code
-					</li>
-					<li class='fragment'>
-						Isolate scenarios
-					</li>
-					<li class='fragment'>
-						Share your learnings
-					</li>
-				</ul>
-			</section>
+			<script src="../../lib/js/head.min.js"></script>
+			<script src="../../js/reveal.js"></script>
 
-			<section>
-				<h2>Q & A</h2>
-				<p>
-					<small>
-						<a href="mailto:saurabh.hirani@gmail.com">saurabh.hirani@gmail.com</a>
-						/ <a href="http://twitter.com/sphirani">@sphirani </a>
-					</small>
-				</p>
-			</section>
+			<script>
 
-			<section>
-				<h2>Why was gevent + requests faster</h2>
-				<ul>
-					<li class='fragment'>gevent.monkey.patch_all patches all stdlib</li>
-					<li class='fragment'>grequests monkey.patch_all skips <b>select</b></li>
-					<li class='fragment'>pyopenssl calls urllib3 wait - which calls select</li>
-					<li class='fragment'>Unpatched select is blocking</li>
-				</ul>
-			</section>
+				// Full list of configuration options available at:
+				// https://github.com/hakimel/reveal.js#configuration
+				Reveal.initialize({
+					controls: true,
+					progress: true,
+					history: true,
+					center: true,
 
-		</div>
+					transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-		<script src="../../lib/js/head.min.js"></script>
-		<script src="../../js/reveal.js"></script>
-
-		<script>
-
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
-
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
-
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: '../../lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: '../../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: '../../plugin/zoom-js/zoom.js', async: true },
-					{ src: '../../plugin/notes/notes.js', async: true }
-				]
-			});
-			Reveal.configure({
-				autoSlide: 0
-			});
-		</script>
+					// Optional reveal.js plugins
+					dependencies: [
+						{ src: '../../lib/js/classList.js', condition: function () { return !document.body.classList; } },
+						{ src: '../../plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+						{ src: '../../plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+						{ src: '../../plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+						{ src: '../../plugin/zoom-js/zoom.js', async: true },
+						{ src: '../../plugin/notes/notes.js', async: true }
+					]
+				});
+				Reveal.configure({
+					autoSlide: 0
+				});
+			</script>
 	</body>
+
 </html>
