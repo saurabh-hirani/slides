@@ -1,8 +1,15 @@
 ### Stage-1 socket class without pyopenssl
 
-```shell
-./docker-exec.sh test_grequests_python27_1 \
-/usr/local/bin/python /app/test_grequests_v1.py \
---url https://https_server:8081/delay/1 --url-count 5 \
---socket-class
+```text
+STAGE=1 PYVERSIONS=37 PROTO=https COUNT=3 SOCKET_CLASS=1 ./bin/run-stages.sh | grep socket_class
+```
+
+#### Sample output
+
+```text
+STAGE=1 PYVERSIONS=37 PROTO=https COUNT=3 SOCKET_CLASS=1 ./bin/run-stages.sh | grep socket_class
+```
+
+```text
+2019-10-07 10:26:12,522  - python37_1 - test_grequests_v1.py:main:168 - WARNING - socket_class = <class 'gevent._ssl3.SSLSocket'>
 ```

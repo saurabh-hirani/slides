@@ -1,8 +1,15 @@
 ### Stage-2 socket class with pyopenssl
 
-```shell
-./docker-exec.sh test_grequests_python27_2 \
-/usr/local/bin/python /app/test_grequests_v1.py \
---url https://https_server:8081/delay/1 --url-count 3 \
---socket-class
+```text
+STAGE=2 PYVERSIONS=37 PROTO=https COUNT=3 SOCKET_CLASS=1 ./bin/run-stages.sh | grep socket_class
+```
+
+#### Sample output
+
+```text
+STAGE=2 PYVERSIONS=37 PROTO=https COUNT=3 SOCKET_CLASS=1 ./bin/run-stages.sh | grep socket_class
+```
+
+```text
+2019-10-07 10:24:39,027  - python37_2 - test_grequests_v1.py:main:168 - WARNING - socket_class = <class 'urllib3.contrib.pyopenssl.WrappedSocket'>
 ```

@@ -1,6 +1,9 @@
 ### Monkey patching demo
 
-```
+
+#### Socket module without monkey patching
+
+```text
 $ python
 
 import inspect
@@ -13,7 +16,9 @@ inspect.getsourcefile(socket.ssl)
 exit()
 ```
 
-```
+#### Socket module with monkey patching
+
+```text
 $ python
 
 from gevent import monkey
@@ -28,24 +33,84 @@ inspect.getsourcefile(socket.ssl)
 exit()
 ```
 
+#### Bring your own monkey
+
+```text
+cd monkey_patching_demo
 ```
-$ cd monkey_patching_demo
 
-$ cat blocking_socket.py
+```text
+cat blocking_socket.py
+```
 
-$ cat non_blocking_socket.py
+```python
 
-$ cat call_blocking_socket.py
+def socket():
+  print("I will block")
 
-$ python call_blocking_socket.py
+```
 
+```text
+cat non_blocking_socket.py
+```
+
+```python
+
+def socket():
+  print("I will not block")
+
+```
+
+```text
+cat call_blocking_socket.py
+```
+
+```python
+
+import blocking_socket
+blocking_socket.socket()
+
+```
+
+```text
+python call_blocking_socket.py
+```
+
+```text
 I will block
+```
 
-$ cat patch_and_call_blocking_socket.py
+```text
+cat patch_and_call_blocking_socket.py
+```
 
-$ python patch_and_call_blocking_socket.py
+```python
 
-I won't block
+import patcher
+patcher.patch_all()
 
-$ cat patcher.py
+import blocking_socket
+blocking_socket.socket()
+
+```
+
+```text
+python patch_and_call_blocking_socket.py
+```
+
+```text
+I will not block
+```
+
+```text
+cat patcher.py
+```
+
+```python
+
+def patch_all():
+  import blocking_socket
+  import non_blocking_socket
+  blocking_socket.socket = non_blocking_socket.socket
+
 ```

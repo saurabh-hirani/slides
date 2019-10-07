@@ -1,6 +1,7 @@
 ### Local setup
 
-```shell
-docker-compose --project-name test_grequests up \
-               --build --force-recreate
+```
+./server/run_http_server.sh
+./server/generate_https_keys.sh
+./server/run_https_server.sh
 ```

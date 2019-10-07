@@ -54,7 +54,6 @@
 						</small>
 					</p>
 				</section>
-
 				<section>
 					<h2>What's in it for you?</h2>
 					<ul>
@@ -171,10 +170,7 @@
 					<h2>Local setup</h2>
 					<ul>
 						<li class='fragment'>
-							HTTP server
-						</li>
-						<li class='fragment'>
-							HTTPS server
+							<a href="./notes/local-setup.md" target="_blank">Run HTTP, HTTPS server</a>
 						</li>
 						<li class='fragment'>
 							Powered by <a href="https://github.com/mccutchen/go-httpbin" target="_blank">go-httpbin</a>
@@ -624,16 +620,11 @@
 					<h2>Local setup</h2>
 					<ul>
 						<li class='fragment'>
-							Multiple docker containers
+							<a href="./notes/docker-setup.md" target="_blank">Multiple docker containers</a>
 						</li>
 
 						<li class='fragment'>
 							Each container represents a stage in our problem
-						</li>
-						<li class='fragment'>
-							<a href="./notes/local-setup.md" target="_blank">
-								docker-compose command
-							</a>
 						</li>
 						<!--
 							<li class='fragment'>
@@ -901,7 +892,7 @@ exit()
 							Details
 						</a>
 						+
-						<a href="https://www.youtube.com/watch?v=GunMToxbE0E">
+						<a href="https://www.youtube.com/watch?v=GunMToxbE0E" target="_blank">
 							Kavya Joshi's excellent in-depth talk
 						</a>
 					</li>
@@ -979,11 +970,6 @@ exit()
 				</section>
 				<!--
 
-				<li class='fragment'>
-					<a href="./images/urllib3-new-conn.png" target="_blank">
-						Concurrent conns but Stage-2 send/recv serial
-					</a>
-				</li>
 				-->
 
 				<section>
@@ -1053,6 +1039,26 @@ exit()
 				</section>
 
 				<section>
+					<h2>gevent-openssl patching flow</h2>
+				</section>
+
+				<section data-transition="none">
+					<img src="./images/gevent-openssl-monkey-patching-1.png" style="top:0;left:0;" height="600" width="600">
+				</section>
+				<section data-transition="none">
+					<img src="./images/gevent-openssl-monkey-patching-2.png" style="top:0;left:0;" height="600" width="600">
+				</section>
+				<section data-transition="none">
+					<img src="./images/gevent-openssl-monkey-patching-3.png" style="top:0;left:0;" height="600" width="600">
+				</section>
+				<section data-transition="none">
+					<img src="./images/gevent-openssl-monkey-patching-4.png" style="top:0;left:0;" height="600" width="600">
+				</section>
+				<section data-transition="none">
+					<img src="./images/gevent-openssl-monkey-patching-5.png" style="top:0;left:0;" height="600" width="600">
+				</section>
+
+				<section>
 					<h2>Stage-3 - Fix-1</h2>
 					<ul>
 						<li class='fragment'>
@@ -1075,10 +1081,10 @@ exit()
 							</a>
 						</li>
 						<li class='fragment'>
-							Python 2.7 fast
+							Python 2.7 <span style="color: darkgreen">fast</span>
 						</li>
 						<li class='fragment'>
-							Python 3.7 slow!!
+							Python 3.7 <span style="color: darkred">slow!!</span>
 							</a>
 						</li>
 					</ul>
@@ -1181,6 +1187,12 @@ exit()
 							Patch gevent-openssl to add <b>recv_into</b>
 						</li>
 						<li class='fragment'>
+							<a href="./notes/gevent-openssl-no-recv_into.md" target="_blank">
+								Verify before patch no recv_into
+							</a>
+						</li>
+
+						<li class='fragment'>
 							<a href="./notes/stage-4-before-patching-demo.md" target="_blank">
 								Before patching demo
 							</a>
@@ -1192,7 +1204,7 @@ exit()
 						</li>
 						<li class='fragment'>
 							<a href="./notes/gevent-openssl-with-recv_into.md" target="_blank">
-								Verify patch
+								Verify patch added recv_into
 							</a>
 						</li>
 						<li class='fragment'>
@@ -1255,9 +1267,6 @@ exit()
 					</table>
 				</section>
 
-
-
-
 				<section>
 					<img src="./images/grequests-stage-5-slap.jpg" style="top:0;left:0;">
 				</section>
@@ -1268,21 +1277,42 @@ exit()
 
 				<section>
 					<h2>Takeaways</h2>
+					<!--
 					<ul>
 						<li class='fragment'>
-							Visualize code flow
+							Monkey patching order matters
 						</li>
 						<li class='fragment'>
-							Profile + trace your code
-						</li>
-						<li class='fragment'>
-							Isolate scenarios
-						</li>
-						<li class='fragment'>
-							Share your learnings
+							And ...
 						</li>
 					</ul>
+					-->
 				</section>
+
+				<section data-transition="none">
+					<img src="./images/takeaways-monkeys-1.png" style="top:0;left:0;">
+				</section>
+
+				<section data-transition="none">
+					<img src="./images/takeaways-monkeys-2.png" style="top:0;left:0;">
+				</section>
+
+				<section data-transition="none">
+					<img src="./images/takeaways-monkeys-3.png" style="top:0;left:0;">
+				</section>
+
+				<section data-transition="none">
+					<img src="./images/takeaways-monkeys-4.png" style="top:0;left:0;">
+				</section>
+
+				<section data-transition="none">
+					<img src="./images/takeaways-monkeys-5.png" style="top:0;left:0;">
+				</section>
+
+				<section data-transition="none">
+					<img  src="./images/takeaways-monkeys-6.png" style="top:0;left:0;">
+				</section>
+
 
 				<section>
 					<h2>Q & A</h2>
@@ -1338,6 +1368,12 @@ exit()
 					</ul>
 				</section>
 
+				<section>
+					<h2>Why - opens concurrent even if Python2.7 + HTTPS is slow?</h2>
+					<a href="./images/urllib3-new-conn.png" target="_blank">
+						Concurrent conns but Stage-2 send/recv serial
+					</a>
+				</section>
 			</div>
 
 			<script src="../../lib/js/head.min.js"></script>

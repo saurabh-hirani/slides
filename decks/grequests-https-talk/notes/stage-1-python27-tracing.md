@@ -2,7 +2,6 @@
 
 ```
 STAGE=1 PYVERSIONS=27 PROTO=https COUNT=3 TRACE=1 ./bin/run-stages.sh > stages/01/python27-trace.txt
-less stages/01/python2.7-trace.txt
 
 less stages/01/python27/trace.txt
 
