@@ -1,10 +1,10 @@
 ### Test grequests
 
 ```shell
-cat ./bin/test-grequests.py
 python2 ./bin/test-grequests.py https 3
 python3 ./bin/test-grequests.py https 3
 ```
+
 
 
 #### Sample output
@@ -40,4 +40,5 @@ python3 ./bin/test-grequests.py https 3
 2019-10-07 17:27:26,470 test-grequests.py:<module>:38 - INFO - END
 2019-10-07 17:27:26,470 test-grequests.py:<module>:41 - INFO - total_time = 1.063 seconds
 ```
+
 

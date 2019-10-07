@@ -3,12 +3,32 @@
 ```text
 cat stages/01/python27/requirements.txt
 
+cat stages/01/python37/requirements.txt
+```
+
+```text
+
+./docker-exec.sh test_grequests_python27_1 \
+ /usr/local/bin/python /app/test_grequests_v1.py \
+ --log-level DEBUG \
+ --url https://https_server:8081/delay/1 --url-count 5 \
+ --profile-code --profile-stats-count 20
+
+# IS SAME AS
+
+STAGE=1 PYVERSIONS=27 PROTO=https COUNT=5 LOG_LEVEL=DEBUG ./bin/run-stages.sh
+
+# USE STAGE=1... for readability
+```
+
+```text
 STAGE=1 PYVERSIONS=27 PROTO=https COUNT=5 ./bin/run-stages.sh | grep -E '===|total_time|installed_modules'
-STAGE=1 PYVERSIONS=27 PROTO=https COUNT=5 ./bin/run-stages.sh
 
 STAGE=1 PYVERSIONS=37 PROTO=https COUNT=5 ./bin/run-stages.sh | grep -E '===|total_time|installed_modules'
 STAGE=1 PYVERSIONS=37 PROTO=https COUNT=5 ./bin/run-stages.sh
 ```
+
+
 
 #### Sample output
 
@@ -22,6 +42,19 @@ requests==2.21.0
 gevent==1.4.0
 grequests==0.3.0
 ```
+
+```text
+cat stages/01/python37/requirements.txt
+```
+
+```text
+urllib3==1.24.1
+requests==2.21.0
+gevent==1.4.0
+grequests==0.3.0
+```
+
+
 
 ```text
 STAGE=1 PYVERSIONS=27 PROTO=https COUNT=5 ./bin/run-stages.sh | grep -E '===|total_time|installed_modules'
@@ -102,3 +135,4 @@ test_grequests_python37_1: installed_modules: urllib3==1.24.1 requests==2.21.0 g
 
 =============
 ```
+

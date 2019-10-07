@@ -1,10 +1,9 @@
 ### Stage-0 Python2.7 profiling
 
 ```
-python2 ./bin/test_grequests_v1.py --url https://localhost:8082/delay/1 --url-count 5 --log-level DEBUG --profile-code --profile-stats-count 20
-
 STAGE=0 PYVERSIONS=27 PROTO=https COUNT=3 PROFILE=1 ./bin/run-stages.sh
 ```
+
 
 #### Sample output
 
@@ -67,3 +66,4 @@ STAGE=0 PYVERSIONS=27 PROTO=https COUNT=3 PROFILE=1 ./bin/run-stages.sh
       3/2    0.000    0.000    2.030    1.015 /usr/local/lib/python2.7/site-packages/gevent/_socket2.py:233(connect)
 =============
 ```
+

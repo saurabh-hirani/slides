@@ -79,10 +79,10 @@
 							Python program - 10,000+ HTTPS GETs
 						</li>
 						<li class='fragment'>
-							Runs slow on Python 2.7
+							Ran slow on Python 2.7
 						</li>
 						<li class='fragment'>
-							Runs fast on Python 3.7
+							Ran fast on Python 3.7
 						</li>
 					</ul>
 				</section>
@@ -95,13 +95,19 @@
 					<h2>Use case</h2>
 					<ul>
 						<li class='fragment'>
-							Daily reporting tool: 10,000+ HTTP GETs
+							Reporting tool: 10,000+ HTTP GETs
 						</li>
 						<li class='fragment'>
-							Runs once per day
+							Ran on AWS EC2
 						</li>
 						<li class='fragment'>
-							Takes 20-25 mins (serial requests)
+							Once per day
+						</li>
+						<li class='fragment'>
+							20-25 mins
+						</li>
+						<li class='fragment'>
+							requests module - serial processing
 						</li>
 					</ul>
 				</section>
@@ -126,6 +132,9 @@
 					<ul>
 						<li class='fragment'>
 							AWS Lambda 15 mins max runtime
+						</li>
+						<li class='fragment'>
+							Existing code took 20-25 mins to run
 						</li>
 					</ul>
 				</section>
@@ -170,7 +179,10 @@
 					<h2>Local setup</h2>
 					<ul>
 						<li class='fragment'>
-							<a href="./notes/local-setup.md" target="_blank">Run HTTP, HTTPS server</a>
+							<a href="./notes/local-setup.md" target="_blank">HTTP, HTTPS server</a>
+						</li>
+						<li class='fragment'>
+							Test URL - /delay/1 - delay the response by 1 second
 						</li>
 						<li class='fragment'>
 							Powered by <a href="https://github.com/mccutchen/go-httpbin" target="_blank">go-httpbin</a>
@@ -238,6 +250,10 @@
 								Python 3.7 - <span style='color: darkgreen'>fast</span>
 							</span>
 						</li>
+						<li class='fragment' data-fragment-index="6">
+							Why is grequests + Python 2.7 + HTTPS <span style='color: darkred'>slow</span>?
+
+						</li>
 					</ul>
 				</section>
 
@@ -245,10 +261,12 @@
 					<h2>Add debug statements</h2>
 					<ul>
 						<li class='fragment'>
-							Python2.7 - open concurrently, send serially
+							Python2.7 - open <b style='color: darkgreen'>concurrently</b>, send <b
+								style="color: darkred">serially</b>
 						</li>
 						<li class='fragment'>
-							Python3.7 - open concurrently, send concurrently
+							Python3.7 - open <b style='color: darkgreen'>concurrently</b>, send <b
+								style='color: darkgreen'>concurrently</b>
 						</li>
 						<li class='fragment'>
 							<a href="./notes/patch-urllib3.md" target="_blank">Patch urllib3 with a
@@ -264,7 +282,7 @@
 				</section>
 
 				<section>
-					<h2>What we had - requests</h2>
+					<h2>Visualize - requests</h2>
 					<!--
 						<ul>
 							<li class='fragment'>Client: Open a connection to the server.</li>
@@ -351,7 +369,7 @@
 				</section>
 
 				<section>
-					<h2>What we wanted - Python3.7 grequests flow</h2>
+					<h2>Visualize - Python3.7 grequests flow</h2>
 					<!--
 						<ul>
 							<li class='fragment'>Client: Open a connection to the server.</li>
@@ -451,7 +469,7 @@
 				</section>
 
 				<section>
-					<h2>What we got - Python2.7 grequests flow</h2>
+					<h2>Visualize - Python2.7 grequests flow</h2>
 				</section>
 
 				<section data-transition="none">
@@ -532,10 +550,10 @@
 							<ul>
 								<li class='fragment'>
 									<span class='fragment'>send,</span>
-									<span class='fragment'>block,</span>
+									<span class='fragment'><b>block,</b></span>
 									<span class='fragment'>recv,</span>
 									<span class='fragment'>send,</span>
-									<span class='fragment'>block,</span>
+									<span class='fragment'><b>block,</b></span>
 									<span class='fragment'>recv</span>
 								</li>
 							</ul>
@@ -546,7 +564,7 @@
 								<li class='fragment'>
 									<span class='fragment'>send,</span>
 									<span class='fragment'>send,</span>
-									<span class='fragment'>block,</span>
+									<span class='fragment'><b>block,</b></span>
 									<span class='fragment'>recv,</span>
 									<span class='fragment'>recv</span>
 								</li>
@@ -559,10 +577,10 @@
 									<span class='fragment'>open,</span>
 									<span class='fragment'>open,</span>
 									<span class='fragment'>send,</span>
-									<span class='fragment'>block,</span>
+									<span class='fragment'><b>block,</b></span>
 									<span class='fragment'>recv,</span>
 									<span class='fragment'>send,</span>
-									<span class='fragment'>block,</span>
+									<span class='fragment'><b>block,</b></span>
 									<span class='fragment'>recv</span>
 								</li>
 							</ul>
@@ -570,6 +588,23 @@
 					</ul>
 				</section>
 
+				<section>
+					<h2>Observations</h2>
+					<ul>
+
+					<li class='fragment'>
+						Same code - Variable speed
+					</li>
+					<li class='fragment'>
+						Depends on runtime environment
+					</li>
+					<li class='fragment'>
+						Isolate using docker
+					</li>
+					</ul>
+				</section>
+
+				<!--
 				<section>
 					<h2>Talk to your code</h2>
 					<ul>
@@ -581,6 +616,7 @@
 						<img src="./images/liam-neeson-i-will-trace-you-profile-you.jpg" style="top:0;left:0;">
 					</span>
 				</section>
+				-->
 
 				<!--
 
@@ -620,11 +656,22 @@
 					<h2>Local setup</h2>
 					<ul>
 						<li class='fragment'>
-							<a href="./notes/docker-setup.md" target="_blank">Multiple docker containers</a>
+							Stage-0 - laptop
 						</li>
-
+						<li class='fragment'>
+							Stage-1 - <a href="./notes/docker-setup.md" target="_blank">docker</a>
+						</li>
 						<li class='fragment'>
 							Each container represents a stage in our problem
+						</li>
+						<li class='fragment'>
+							Container used in place of virtualenv - easy to demo
+						</li>
+						<li class='fragment'>
+							Python 2.7 Stage-1 - <b>test_grequests_python27_1</b>
+						</li>
+						<li class='fragment'>
+							Python 3.7 Stage-1 - <b>test_grequests_python37_1</b>
 						</li>
 						<!--
 							<li class='fragment'>
@@ -665,7 +712,7 @@
 							</tr>
 							<tr>
 								<td>1</td>
-								<td>baseline</td>
+								<td>minimal</td>
 								<td>???</td>
 								<td>???</td>
 							</tr>
@@ -702,35 +749,36 @@
 					</section>
 					-->
 				<section>
-					<h2>Stage-1 - Baseline</h2>
+					<h2>Stage-1 - setup</h2>
 					<ul>
-						<li class='fragment' data-fragment-index="1">
-							Demo code -
-							<a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test-grequests.py"
-								target="_blank">
-								test-grequests.py
-							</a>
-							to
-							<a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test_grequests_v1.py"
-								target="_blank">
-								test_grequests_v1.py
-							</a>
+						<li class='fragment'>
+							Modules: grequests, requests, urllib3, gevent
 						</li>
-						<li class='fragment' data-fragment-index="2">
-							Tracing and profiling
+						<li class='fragment'>
+							Python2.7 container: test_grequests_python27_1
 						</li>
-						<li class='fragment' data-fragment-index="3">
-							Isolated docker container
+						<li class='fragment'>
+							Python3.7 container: test_grequests_python37_1
 						</li>
-						<li class='fragment' data-fragment-index="4">
-							Minimal set of modules
-						</li>
-						<li class='fragment' data-fragment-index="5">
+					</ul>
+				</section>
+
+				<section>
+					<h2>Stage-1 - observations</h2>
+					<ul>
+						<li class='fragment'>
 							<a href="./notes/stage-1-demo.md" target="_blank">
 								HTTPS demo
 							</a>
-							- Python2.7, Python3.7
-							<span class='fragment' style="color: darkgreen" data-fragment-index="6">fast</span>
+						</li>
+						<li class='fragment'>
+							Python2.7 <span style="color: darkgreen">fast</span>
+						</li>
+						<li class='fragment'>
+							Python3.7 <span style="color: darkgreen">fast</span>
+						</li>
+						<li class='fragment'>
+							Stage-0 Python2.7 was <span style="color: darkred">slow</span>
 						</li>
 					</ul>
 				</section>
@@ -772,6 +820,21 @@
 				</section>
 
 				<section>
+					<h2>Verify pyopenssl involvement</h2>
+					<ul>
+						<li class='fragment'>
+							<td> <a href="./notes/laptop-check-pyopenssl.md" target="_blank">Demo</a></td>
+						</li>
+						<li class='fragment'>
+							Laptop Python2.7 <b>had</b> pyopenssl
+						</li>
+						<li class='fragment'>
+							Laptop Python3.7 did <b>not</b> have pyopenssl
+						</li>
+					</ul>
+				</section>
+
+				<section>
 					<h2>grequests https status</h2>
 					<table class="reveal">
 						<thead>
@@ -791,7 +854,7 @@
 							</tr>
 							<tr>
 								<td>1</td>
-								<td>baseline</td>
+								<td>minimal</td>
 								<td style="color: darkgreen">fast</td>
 								<td style="color: darkgreen">fast</td>
 							</tr>
@@ -806,18 +869,40 @@
 				</section>
 
 				<section>
-					<h2>Stage-2 - Detect and Verify</h2>
+					<h2>Stage-2 - setup</h2>
 					<ul>
-						<li class='fragment' data-fragment-index="1">
+						<li class='fragment'>
+							Modules: grequests, requests, urllib3, gevent, <b>pyopenssl</b>
+						</li>
+						<li class='fragment'>
 							Stage-1 + <a href="https://pyopenssl.org/en/stable/introduction.html#history">
 								pyopenssl </a>
 						</li>
-						<li class='fragment' data-fragment-index="2">
-							<a href="./notes/stage-2-demo.md" target="_blank">
-								HTTPS Demo
+						<li class='fragment'>
+							Python2.7 container: test_grequests_python27_2
+						</li>
+						<li class='fragment'>
+							Python3.7 container: test_grequests_python37_2
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Stage-2 - observations</h2>
+					<ul>
+						<li class='fragment'">
+							<a href=" ./notes/stage-2-demo.md" target="_blank">
+							HTTPS Demo
 							</a>
-							- Python2.7, Python3.7
-							<span class='fragment' style="color: darkred" data-fragment-index="3">slow</span>
+						</li>
+						<li class='fragment'">
+							Python2.7 <span style=" color: darkred">slow</span>
+						</li>
+						<li class='fragment'">
+							Python3.7 <span style=" color: darkred">slow</span>
+						</li>
+						<li class='fragment'>
+							Stage-1 Python2.7/Python3.7 were <span style="color: darkgreen">fast</span>
 						</li>
 						<!--
 							<li class='fragment'>
@@ -828,7 +913,7 @@
 							</li>
 							-->
 						<li class='fragment'>
-							pyopenssl overriding gevent socket in some way
+							Reason: pyopenssl <b>monkey patching</b> SSLSocket
 						</li>
 					</ul>
 				</section>
@@ -868,6 +953,7 @@ $ python
 
 from gevent import monkey
 monkey.patch_all()
+
 import inspect
 import socket
 
@@ -998,6 +1084,32 @@ exit()
 							style="top:0;left:0;">
 					</section>
 					-->
+
+
+				<section>
+					<h2>gevent-openssl patching flow</h2>
+				</section>
+
+				<section data-transition="none">
+					<img src="./images/gevent-openssl-monkey-patching-1.png" style="top:0;left:0;" height="600"
+						width="600">
+				</section>
+				<section data-transition="none">
+					<img src="./images/gevent-openssl-monkey-patching-2.png" style="top:0;left:0;" height="600"
+						width="600">
+				</section>
+				<section data-transition="none">
+					<img src="./images/gevent-openssl-monkey-patching-3.png" style="top:0;left:0;" height="600"
+						width="600">
+				</section>
+				<section data-transition="none">
+					<img src="./images/gevent-openssl-monkey-patching-4.png" style="top:0;left:0;" height="600"
+						width="600">
+				</section>
+				<section data-transition="none">
+					<img src="./images/gevent-openssl-monkey-patching-5.png" style="top:0;left:0;" height="600"
+						width="600">
+				</section>
 				<section>
 					<h2>grequests https status</h2>
 					<table class="reveal">
@@ -1018,7 +1130,7 @@ exit()
 							</tr>
 							<tr>
 								<td>1</td>
-								<td>baseline</td>
+								<td>minimal</td>
 								<td style="color: darkgreen">fast</td>
 								<td style="color: darkgreen">fast</td>
 							</tr>
@@ -1039,28 +1151,21 @@ exit()
 				</section>
 
 				<section>
-					<h2>gevent-openssl patching flow</h2>
-				</section>
-
-				<section data-transition="none">
-					<img src="./images/gevent-openssl-monkey-patching-1.png" style="top:0;left:0;" height="600" width="600">
-				</section>
-				<section data-transition="none">
-					<img src="./images/gevent-openssl-monkey-patching-2.png" style="top:0;left:0;" height="600" width="600">
-				</section>
-				<section data-transition="none">
-					<img src="./images/gevent-openssl-monkey-patching-3.png" style="top:0;left:0;" height="600" width="600">
-				</section>
-				<section data-transition="none">
-					<img src="./images/gevent-openssl-monkey-patching-4.png" style="top:0;left:0;" height="600" width="600">
-				</section>
-				<section data-transition="none">
-					<img src="./images/gevent-openssl-monkey-patching-5.png" style="top:0;left:0;" height="600" width="600">
-				</section>
-
-				<section>
-					<h2>Stage-3 - Fix-1</h2>
+					<h2>Stage-3 - setup</h2>
 					<ul>
+						<li class='fragment'>
+							Modules: grequests, requests, urllib3, gevent, pyopenssl, <b>gevent-openssl</b>
+						</li>
+						<li class='fragment'>
+							Stage-2 + <a href="https://github.com/mjs/gevent_openssl">gevent-openssl</a>
+						</li>
+						<li class='fragment'>
+							Python2.7 container: test_grequests_python27_3
+						</li>
+						<li class='fragment'>
+							Python3.7 container: test_grequests_python37_3
+						</li>
+						<!--
 						<li class='fragment'>
 							Demo code -
 							<a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests/blob/master/bin/test_grequests_v1.py"
@@ -1073,19 +1178,24 @@ exit()
 								test_grequests_v2.py
 							</a>
 						</li>
+						-->
+					</ul>
+				</section>
+
+				<section>
+					<h2>Stage-3 - observations</h2>
+					<ul>
 						<li class='fragment'>
-							Stage-2 + <a href="https://github.com/mjs/gevent_openssl">gevent-openssl</a></li>
-						<li class='fragment'>
-							<a href="./notes/stage-3-demo.md" target="_blank">
-								Demo
-							</a>
+							<a href="./notes/stage-3-demo.md" target="_blank">HTTPS Demo</a>
 						</li>
 						<li class='fragment'>
 							Python 2.7 <span style="color: darkgreen">fast</span>
 						</li>
 						<li class='fragment'>
 							Python 3.7 <span style="color: darkred">slow!!</span>
-							</a>
+						</li>
+						<li class='fragment'>
+							Stage-1 Python 3.7 was <span style="color: darkgreen">fast</span>
 						</li>
 					</ul>
 				</section>
@@ -1093,7 +1203,48 @@ exit()
 				<section> <img src="./images/grequests-frustration.jpg" style="top:0;left:0;"> </section>
 
 				<section>
-					<h2>How is gevent-openssl making Python3.7 HTTPS slow?</h2>
+					<h2>grequests https status</h2>
+					<table class="reveal">
+						<thead>
+							<tr>
+								<th>Stage</th>
+								<th>Setup</th>
+								<th>Python2.7</th>
+								<th>Python3.7</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>0</td>
+								<td>laptop</td>
+								<td style="color: darkred">slow</td>
+								<td style="color: darkgreen">fast</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>minimal</td>
+								<td style="color: darkgreen">fast</td>
+								<td style="color: darkgreen">fast</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>Stage-1 + pyopenssl</td>
+								<td style="color: darkred">slow</td>
+								<td style="color: darkred">slow</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>Stage-2 + gevent-openssl</td>
+								<td style="color: darkgreen">fast</td>
+								<td style="color: darkred">slow</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+
+				<section>
+					<h2>gevent-openssl making Python3.7 HTTPS slow?</h2>
 				</section>
 
 				<section data-transition="none">
@@ -1154,7 +1305,7 @@ exit()
 							</tr>
 							<tr>
 								<td>1</td>
-								<td>baseline</td>
+								<td>minimal</td>
 								<td style="color: darkgreen">fast</td>
 								<td style="color: darkgreen">fast</td>
 							</tr>
@@ -1181,7 +1332,25 @@ exit()
 				</section>
 
 				<section>
-					<h2>Stage-4 - Fix-2</h2>
+					<h2>Stage-4 - setup</h2>
+					<ul>
+						<li class='fragment'>
+							Modules: grequests, requests, urllib3, gevent, pyopenssl, gevent-openssl
+						</li>
+						<li class='fragment'>
+							Stage-3 + <b>patch</b>
+						</li>
+						<li class='fragment'>
+							Python2.7 container: test_grequests_python27_4
+						</li>
+						<li class='fragment'>
+							Python3.7 container: test_grequests_python27_4
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Stage-4 - observations</h2>
 					<ul>
 						<li class='fragment'>
 							Patch gevent-openssl to add <b>recv_into</b>
@@ -1191,7 +1360,6 @@ exit()
 								Verify before patch no recv_into
 							</a>
 						</li>
-
 						<li class='fragment'>
 							<a href="./notes/stage-4-before-patching-demo.md" target="_blank">
 								Before patching demo
@@ -1212,7 +1380,6 @@ exit()
 								After patching demo
 							</a>
 						</li>
-
 						<li class='fragment'>
 							<a href="https://github.com/mjs/gevent_openssl/pull/15" target="_blank">
 								PR to fix the issue
@@ -1241,7 +1408,7 @@ exit()
 							</tr>
 							<tr>
 								<td>1</td>
-								<td>baseline</td>
+								<td>minimal</td>
 								<td style="color: darkgreen">fast</td>
 								<td style="color: darkgreen">fast</td>
 							</tr>
@@ -1277,8 +1444,10 @@ exit()
 
 				<section>
 					<h2>Takeaways</h2>
-					<!--
 					<ul>
+						<li class='fragment'>
+							Do one type of migration at a time
+						</li>
 						<li class='fragment'>
 							Monkey patching order matters
 						</li>
@@ -1286,7 +1455,6 @@ exit()
 							And ...
 						</li>
 					</ul>
-					-->
 				</section>
 
 				<section data-transition="none">
@@ -1310,7 +1478,7 @@ exit()
 				</section>
 
 				<section data-transition="none">
-					<img  src="./images/takeaways-monkeys-6.png" style="top:0;left:0;">
+					<img src="./images/takeaways-monkeys-6.png" style="top:0;left:0;">
 				</section>
 
 
@@ -1404,6 +1572,8 @@ exit()
 				Reveal.configure({
 					autoSlide: 0
 				});
+				Reveal.configure({ slideNumber: true });
+
 			</script>
 	</body>
 

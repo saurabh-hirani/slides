@@ -3,10 +3,10 @@
 #### Commands
 
 ```shell
-cat test-requests.py
 python2 ./bin/test-requests.py https 3
 python3 ./bin/test-requests.py https 3
 ```
+
 
 
 
@@ -43,3 +43,4 @@ python3 ./bin/test-requests.py https 3
 2019-10-07 17:06:18,382 test-requests.py:<module>:36 - INFO - END
 2019-10-07 17:06:18,382 test-requests.py:<module>:39 - INFO - total_time = 3.105 seconds
 ```
+

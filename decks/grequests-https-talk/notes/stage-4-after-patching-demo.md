@@ -5,7 +5,8 @@ STAGE=4 PYVERSIONS=37 PROTO=https COUNT=3 PROFILE=1 ./bin/run-stages.sh | grep -
 STAGE=4 PYVERSIONS=37 PROTO=https COUNT=3 PROFILE=1 ./bin/run-stages.sh
 ```
 
-### Sample output
+
+#### Sample output
 
 ```text
 STAGE=4 PYVERSIONS=37 PROTO=https COUNT=3 PROFILE=1 ./bin/run-stages.sh | grep -E '===|total_time|installed_modules'
@@ -74,3 +75,5 @@ test_grequests_python37_4: installed_modules: urllib3==1.24.1 requests==2.21.0 g
 =============
 
 ```
+
+
