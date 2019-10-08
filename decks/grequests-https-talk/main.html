@@ -66,6 +66,7 @@
 						<li class='fragment'>
 							grequests + gevent internals
 						</li>
+						<li class='fragment'><a href="https://github.com/saurabh-hirani/grequests-https-python-27-37-tests" target="_blank">Demo code</a>, <a href="http://saurabh-hirani.github.io/slides/decks/grequests-https-talk/main.html#/" target="_blank">slides</a></li>
 						<li class='fragment'>
 							How many monkeys fit in a Clint Eastwood movie title?
 						</li>
@@ -76,7 +77,7 @@
 					<h2>Use case</h2>
 					<ul>
 						<li class='fragment'>
-							Python program - 10,000+ HTTPS GETs
+							Python program - 10,000+ GETs
 						</li>
 						<li class='fragment'>
 							Ran slow on Python 2.7
@@ -95,7 +96,7 @@
 					<h2>Use case</h2>
 					<ul>
 						<li class='fragment'>
-							Reporting tool: 10,000+ HTTP GETs
+							Reporting tool: 10,000+ GETs
 						</li>
 						<li class='fragment'>
 							Ran on AWS EC2
@@ -128,7 +129,7 @@
 				</section>
 
 				<section>
-					<h2>Constraints</h2>
+					<h2>Problem</h2>
 					<ul>
 						<li class='fragment'>
 							AWS Lambda 15 mins max runtime
@@ -667,12 +668,6 @@
 						<li class='fragment'>
 							Container used in place of virtualenv - easy to demo
 						</li>
-						<li class='fragment'>
-							Python 2.7 Stage-1 - <b>test_grequests_python27_1</b>
-						</li>
-						<li class='fragment'>
-							Python 3.7 Stage-1 - <b>test_grequests_python37_1</b>
-						</li>
 						<!--
 							<li class='fragment'>
 								8 containers
@@ -916,6 +911,40 @@
 							Reason: pyopenssl <b>monkey patching</b> SSLSocket
 						</li>
 					</ul>
+				</section>
+
+				<section>
+					<h2>grequests https status</h2>
+					<table class="reveal">
+						<thead>
+							<tr>
+								<th>Stage</th>
+								<th>Setup</th>
+								<th>Python2.7</th>
+								<th>Python3.7</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>0</td>
+								<td>laptop</td>
+								<td style="color: darkred">slow</td>
+								<td style="color: darkgreen">fast</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>minimal</td>
+								<td style="color: darkgreen">fast</td>
+								<td style="color: darkgreen">fast</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>Stage-1 + pyopenssl</td>
+								<td style="color: darkred">slow</td>
+								<td style="color: darkred">slow</td>
+							</tr>
+						</tbody>
+					</table>
 				</section>
 
 				<section>
@@ -1200,8 +1229,6 @@ exit()
 					</ul>
 				</section>
 
-				<section> <img src="./images/grequests-frustration.jpg" style="top:0;left:0;"> </section>
-
 				<section>
 					<h2>grequests https status</h2>
 					<table class="reveal">
@@ -1242,11 +1269,17 @@ exit()
 					</table>
 				</section>
 
+				<!--
+				<section> <img src="./images/grequests-frustration.jpg" style="top:0;left:0;"> </section>
+				-->
 
 				<section>
 					<h2>gevent-openssl making Python3.7 HTTPS slow?</h2>
 				</section>
 
+				<section data-transition="none">
+					<img src="./images/partial-monkey-patching-0.png">
+				</section>
 				<section data-transition="none">
 					<img src="./images/partial-monkey-patching-1.png">
 				</section>
@@ -1278,7 +1311,7 @@ exit()
 						</li>
 						<li class='fragment'>
 							gevent-openssl does not patch
-							<a href="./notes/gevent-openssl-no-recv_into.md" target="_blank">
+							<a href="./notes/stage-3-gevent-openssl-no-recv_into.md" target="_blank">
 								recv_into
 							</a>
 						</li>
@@ -1344,7 +1377,7 @@ exit()
 							Python2.7 container: test_grequests_python27_4
 						</li>
 						<li class='fragment'>
-							Python3.7 container: test_grequests_python27_4
+							Python3.7 container: test_grequests_python37_4
 						</li>
 					</ul>
 				</section>
@@ -1356,7 +1389,7 @@ exit()
 							Patch gevent-openssl to add <b>recv_into</b>
 						</li>
 						<li class='fragment'>
-							<a href="./notes/gevent-openssl-no-recv_into.md" target="_blank">
+							<a href="./notes/stage-4-gevent-openssl-no-recv_into.md" target="_blank">
 								Verify before patch no recv_into
 							</a>
 						</li>
@@ -1489,7 +1522,6 @@ exit()
 				<section data-transition="none">
 					<img src="./images/takeaway-monkeys-6.png" style="top:0;left:0;">
 				</section>
-
 
 				<section>
 					<h2>Q & A</h2>
