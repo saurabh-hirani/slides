@@ -667,6 +667,9 @@
 							Stage-1 - <a href="./notes/docker-setup.md" target="_blank">docker</a>
 						</li>
 						<li class='fragment'>
+							Minimal set of modules
+						</li>
+						<li class='fragment'>
 							Each container represents a stage in our problem
 						</li>
 						<li class='fragment'>
@@ -963,7 +966,7 @@
 					</ul>
 				</section>
 				<section>
-					<h2>Without monkey patching</h2>
+					<h3>Without monkey patching</h3>
 					<pre><code class="hljs" data-trim data-line-numbers="4,8-9">
 $ python
 
@@ -980,7 +983,7 @@ exit()
 							</code></pre>
 				</section>
 				<section data-transition="none">
-					<h2>With monkey patching</h2>
+					<h3>With monkey patching</h3>
 					<pre><code class="hljs" data-trim data-line-numbers="4,8-9">
 $ python
 
@@ -999,16 +1002,85 @@ inspect.getsourcefile(socket.ssl)
 exit()
 					</code></pre>
 				</section>
+
+				<section data-transition="none">
+					<h3>Without monkey patching - blocking socket blocks</h3>
+					<pre><code class="hljs" data-trim data-line-numbers="4,8-9">
+$ cd monkey_patching_demo
+
+$ cat blocking_socket.py
+
+def socket():
+    print("I will block")
+
+$ python
+
+import blocking_socket
+blocking_socket.socket()
+
+I will block
+
+exit()
+					</code></pre>
+				</section>
+
+				<section data-transition="none">
+					<h3>Without monkey patching - non-blocking socket doesn't</h3>
+					<pre><code class="hljs" data-trim data-line-numbers="4,8-9">
+$ cd monkey_patching_demo
+
+$ cat non_blocking_socket.py
+
+def socket():
+    print("I will not block")
+
+$ python
+
+import non_blocking_socket
+non_blocking_socket.socket()
+
+I will not block
+
+exit()
+					</code></pre>
+				</section>
+
+
+				<section data-transition="none">
+					<h3>With monkey patching - blocking socket replaced</h3>
+					<pre><code class="hljs" data-trim data-line-numbers="4,8-9">
+$ python
+
+import patcher
+patcher.patch_all()
+
+import blocking_socket
+blocking_socket.socket()
+
+I will not block
+
+exit()
+					</code></pre>
+				</section>
+
+				<section data-transition="none">
+					<h3>That which monkey patches</h3>
+					<pre><code class="hljs" data-trim data-line-numbers="4,8-9">
+
+$ cat patcher.py
+
+def patch_all():
+    import blocking_socket
+    import non_blocking_socket
+    blocking_socket.socket = non_blocking_socket.socket
+					</code></pre>
+				</section>
+
 				<section>
-					<h2>Under the hood</h2>
-					<li class='fragment'>
-						<a href="./notes/monkey-patching-demo.md" target="_blank">
-							Monkey patching demo
-						</a>
-					</li>
+					<h2>gevent In-depth explanation</h2>
 					<li class='fragment'>
 						<a href="./notes/gevent-basics.md" target="_blank">
-							Details
+							Notes
 						</a>
 						+
 						<a href="https://www.youtube.com/watch?v=GunMToxbE0E" target="_blank">
