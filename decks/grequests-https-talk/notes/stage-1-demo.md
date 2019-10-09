@@ -29,10 +29,14 @@ STAGE=1 PYVERSIONS=27 PROTO=https COUNT=5 LOG_LEVEL=DEBUG ./bin/run-stages.sh
 ### Using the following commands for readability
 
 ```text
-STAGE=1 PYVERSIONS=27 PROTO=https COUNT=5 ./bin/run-stages.sh | grep -E '===|total_time|installed_module'
+STAGE=1 PYVERSIONS=27 PROTO=https COUNT=5 ./bin/run-stages.sh | \
+grep -E '===|total_time|installed_module'
+
 STAGE=1 PYVERSIONS=27 PROTO=https COUNT=5 LOG_LEVEL=DEBUG ./bin/run-stages.sh
 
-STAGE=1 PYVERSIONS=37 PROTO=https COUNT=5 ./bin/run-stages.sh | grep -E '===|total_time|installed_module'
+STAGE=1 PYVERSIONS=37 PROTO=https COUNT=5 ./bin/run-stages.sh | \
+grep -E '===|total_time|installed_module'
+
 STAGE=1 PYVERSIONS=37 PROTO=https COUNT=5 ./bin/run-stages.sh
 ```
 
@@ -61,7 +65,8 @@ grequests==0.3.0
 ```
 
 ```text
-STAGE=1 PYVERSIONS=27 PROTO=https COUNT=5 ./bin/run-stages.sh | grep -E '===|total_time|installed_module'
+STAGE=1 PYVERSIONS=27 PROTO=https COUNT=5 ./bin/run-stages.sh | \
+grep -E '===|total_time|installed_module'
 ```
 
 ```text
@@ -109,7 +114,8 @@ python27_1 - END
 ```
 
 ```text
-STAGE=1 PYVERSIONS=37 PROTO=https COUNT=5 ./bin/run-stages.sh | grep -E '===|total_time|installed_module'
+STAGE=1 PYVERSIONS=37 PROTO=https COUNT=5 ./bin/run-stages.sh | \
+grep -E '===|total_time|installed_module'
 ```
 
 ```text
