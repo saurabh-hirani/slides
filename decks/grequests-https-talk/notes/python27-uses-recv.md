@@ -7,7 +7,6 @@ STAGE=3 PYVERSIONS=27 PROTO=https COUNT=3 TRACE=1 ./bin/run-stages.sh > stages/0
 
 less stages/03/python27/trace.txt
 ```
-```
 
 #### Sample output
 
